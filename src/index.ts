@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import {FitbitLocaleConfig, SupportedLocale} from "./interfaces/fitbit-locale-config.interface";
 import {GenerateDateLocales} from "./modules/dates.module";
 import {GenerateExistingLocales} from "./modules/existing.module";

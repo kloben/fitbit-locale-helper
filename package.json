@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {
-    "fitbit-locale-generate": "bin/generate.js"
+    "fitbit-locale-generate": "bin/index.js"
   },
   "author": "",
   "license": "ISC",
