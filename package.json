@@ -4,6 +4,8 @@
   "description": "This library allows you to easily generate locale (.po files) for your Fitbit app or clockface",
   "main": "index.js",
   "scripts": {
+    "build": "rm -r bin && tsc",
+    "dev": "tsc && node bin/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {
@@ -11,9 +13,7 @@
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "po2json": "^0.4.5"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@types/date-fns": "^2.6.0",
     "@types/node": "^14.14.22",
