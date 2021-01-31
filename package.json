@@ -11,11 +11,13 @@
   },
   "author": "",
   "license": "ISC",
+  "dependencies": {
+    "po2json": "^0.4.5"
+  },
   "devDependencies": {
     "@types/date-fns": "^2.6.0",
     "@types/node": "^14.14.22",
     "date-fns": "^2.16.1",
-    "po2json": "^0.4.5",
     "typescript": "^4.1.3"
   }
 }
