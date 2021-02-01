@@ -1,0 +1,11 @@
+{
+  "localesFolder": "testLocales",
+  "app": {
+    "weekCfg": {
+      "format": "E"
+    },
+    "monthCfg": {
+      "format": "MMM"
+    }
+  }
+}

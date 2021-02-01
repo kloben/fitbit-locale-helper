@@ -5,14 +5,24 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.GenerateExistingLocales = void 0;
 var fs_1 = __importDefault(require("fs"));
-var po2json_1 = __importDefault(require("po2json"));
 function GenerateExistingLocales(sectionId, localesFolder, langId) {
     var filePath = localesFolder + "/" + sectionId + "/" + langId + ".po";
-    if (fs_1.default.existsSync(filePath)) {
-        return po2json_1.default.parseFileSync(filePath, {
-            format: 'mf'
-        });
-    }
-    return {};
+    return fs_1.default.existsSync(filePath) ? extractFromPo(filePath) : {};
 }
 exports.GenerateExistingLocales = GenerateExistingLocales;
+function extractFromPo(filename) {
+    var dataLocales = {};
+    var fileData = fs_1.default.readFileSync(filename, 'utf-8').split('\n');
+    var currentKey;
+    for (var _i = 0, fileData_1 = fileData; _i < fileData_1.length; _i++) {
+        var line = fileData_1[_i];
+        if (line.startsWith('msgid')) {
+            currentKey = JSON.parse(line.substring(6));
+        }
+        else if (line.startsWith('msgstr') && currentKey) {
+            dataLocales[currentKey] = JSON.parse(line.substring(7));
+            currentKey = null;
+        }
+    }
+    return dataLocales;
+}

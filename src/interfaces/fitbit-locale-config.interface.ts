@@ -1,3 +1,5 @@
+import {MonthFormat, WeekFormat} from "../enums/date-formats.enum";
+
 export enum SupportedLocale {
   "es-ES" = "es-ES",
   "en-US" = "en-US",
@@ -19,20 +21,26 @@ export enum SupportedLocale {
 }
 
 export interface DateConfig {
-  format: string,
+  format: WeekFormat | MonthFormat,
   prefix?: string,
   suffix?: string
 }
+export interface WeekConfig extends DateConfig{
+  format: WeekFormat
+}
+
+export interface MonthConfig extends DateConfig {
+  format: MonthFormat
+}
 
 export interface SectionLocaleConfig {
-  weekCfg?: DateConfig,
-  monthCfg?: DateConfig
+  weekCfg?: WeekConfig,
+  monthCfg?: MonthConfig
 }
 
 export interface FitbitLocaleConfig {
-  localesFolder?: string,
-  srcFolder?: string,
-  locales?: Array<SupportedLocale>,
+  localesFolder: string,
+  locales: Array<SupportedLocale>,
   app?: SectionLocaleConfig,
   companion?: SectionLocaleConfig,
   settings?: SectionLocaleConfig,

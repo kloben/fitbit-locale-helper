@@ -1,25 +1,12 @@
 #!/usr/bin/env node
 
-import {FitbitLocaleConfig, SupportedLocale} from "./interfaces/fitbit-locale-config.interface";
 import {GenerateDateLocales} from "./modules/dates.module";
 import {GenerateExistingLocales} from "./modules/existing.module";
 import {StoreLocales} from "./modules/store.module";
+import {GetConfig} from "./modules/config.module";
 
-const config: FitbitLocaleConfig = {
-  localesFolder: 'testLocales',
-  srcFolder: 'testSrc',
-  locales: [SupportedLocale['es-ES']],
-  app: {
-    weekCfg: {
-      format: 'E',
-      prefix: 'week_'
-    },
-    monthCfg: {
-      format: 'MMM',
-      prefix: 'month_'
-    }
-  }
-}
+const config = GetConfig();
+console.log(config);
 
 function generateSectionLocales(sectionId: string) {
   for(let langId of config.locales) {
@@ -29,7 +16,7 @@ function generateSectionLocales(sectionId: string) {
     }
 
     if(Object.keys(langLocales).length) {
-      StoreLocales(sectionId, langId, config.srcFolder, langLocales)
+      StoreLocales(sectionId, langId, langLocales)
     }
   }
 }
