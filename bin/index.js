@@ -17,7 +17,6 @@ var existing_module_1 = require("./modules/existing.module");
 var store_module_1 = require("./modules/store.module");
 var config_module_1 = require("./modules/config.module");
 var config = config_module_1.GetConfig();
-console.log(config);
 function generateSectionLocales(sectionId) {
     for (var _i = 0, _a = config.locales; _i < _a.length; _i++) {
         var langId = _a[_i];
