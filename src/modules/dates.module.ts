@@ -1,6 +1,7 @@
 import format from 'date-fns/format/index.js';
 import {de, enUS, es, fr, it, ja, ko, nl, sv, zhCN, zhTW, ru, ptBR, ro, cs, pl, id} from 'date-fns/locale/index.js';
-import {SectionLocaleConfig, SupportedLocale} from "../interfaces/fitbit-locale-config.interface";
+import {SectionLocaleConfig} from "../interfaces/fitbit-locale-config.interface";
+import {SupportedLocale} from "../enums/supported-locales.enum";
 
 const dateFnsLocales = {
   'es-ES': es,

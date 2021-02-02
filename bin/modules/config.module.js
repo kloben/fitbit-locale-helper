@@ -15,14 +15,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.GetConfig = void 0;
-var fitbit_locale_config_interface_1 = require("../interfaces/fitbit-locale-config.interface");
 var fs_1 = __importDefault(require("fs"));
 var path_1 = __importDefault(require("path"));
 var date_formats_enum_1 = require("../enums/date-formats.enum");
+var supported_locales_enum_1 = require("../enums/supported-locales.enum");
 function GetConfig() {
     var cfgPath = path_1.default.join(process.cwd(), 'fitbitLocaleHelper.json');
     var userConfig = fs_1.default.existsSync(cfgPath) ? JSON.parse(fs_1.default.readFileSync(cfgPath, 'utf8')) : {};
-    var locales = userConfig.locales ? verifyLocales(userConfig.locales) : Object.values(fitbit_locale_config_interface_1.SupportedLocale);
+    var locales = userConfig.locales ? verifyLocales(userConfig.locales) : Object.values(supported_locales_enum_1.SupportedLocale);
     var sectionsData = {};
     for (var _i = 0, _a = ['app', 'settings', 'companion']; _i < _a.length; _i++) {
         var sectionId = _a[_i];
@@ -78,7 +78,7 @@ function getPrefixes(userCfg, defaultPrefix) {
 }
 function verifyLocales(providedLocales) {
     return providedLocales.filter(function (localeId) {
-        if (!fitbit_locale_config_interface_1.SupportedLocale[localeId]) {
+        if (!supported_locales_enum_1.SupportedLocale[localeId]) {
             console.log("Unknown locale \"" + localeId + "\". Skipping...");
             return false;
         }

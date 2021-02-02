@@ -1,23 +1,2 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.SupportedLocale = void 0;
-var SupportedLocale;
-(function (SupportedLocale) {
-    SupportedLocale["es-ES"] = "es-ES";
-    SupportedLocale["en-US"] = "en-US";
-    SupportedLocale["de-DE"] = "de-DE";
-    SupportedLocale["fr-FR"] = "fr-FR";
-    SupportedLocale["it-IT"] = "it-IT";
-    SupportedLocale["ja-JP"] = "ja-JP";
-    SupportedLocale["ko-KR"] = "ko-KR";
-    SupportedLocale["nl-NL"] = "nl-NL";
-    SupportedLocale["sv-SE"] = "sv-SE";
-    SupportedLocale["zh-CN"] = "zh-CN";
-    SupportedLocale["zh-TW"] = "zh-TW";
-    SupportedLocale["ru-RU"] = "ru-RU";
-    SupportedLocale["pt-BR"] = "pt-BR";
-    SupportedLocale["ro-RO"] = "ro-RO";
-    SupportedLocale["cs-CZ"] = "cs-CZ";
-    SupportedLocale["pl-PL"] = "pl-PL";
-    SupportedLocale["id-ID"] = "id-ID";
-})(SupportedLocale = exports.SupportedLocale || (exports.SupportedLocale = {}));

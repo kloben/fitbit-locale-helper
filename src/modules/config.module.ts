@@ -1,11 +1,12 @@
 import {
   FitbitLocaleConfig,
   SectionLocaleConfig,
-  SupportedLocale, WeekConfig
+  WeekConfig
 } from "../interfaces/fitbit-locale-config.interface";
 import fs from "fs";
 import path from "path";
 import {MonthFormat, WeekFormat} from "../enums/date-formats.enum";
+import {SupportedLocale} from "../enums/supported-locales.enum";
 
 export function GetConfig(): FitbitLocaleConfig {
   const cfgPath = path.join(process.cwd(), 'fitbitLocaleHelper.json');
