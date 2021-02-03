@@ -35,10 +35,10 @@ for (let i = 1; i <= 7; i++) {
 
 export function GenerateDateLocales(localeId: SupportedLocale, cfg: SectionLocaleConfig) {
   const locales: { [keyId: string]: string } = {}
-  if (cfg.weekCfg) {
+  if (cfg.weekDayCfg) {
     for (const date of weekDates) {
-      const key = `${cfg.weekCfg.prefix || 'week_'}${date.getDay()}${cfg.weekCfg.suffix || ''}`;
-      locales[key] = format(date, cfg.weekCfg.format, {locale: dateFnsLocales[localeId]})
+      const key = `${cfg.weekDayCfg.prefix || 'week_'}${date.getDay()}${cfg.weekDayCfg.suffix || ''}`;
+      locales[key] = format(date, cfg.weekDayCfg.format, {locale: dateFnsLocales[localeId]})
     }
   }
   if (cfg.monthCfg) {

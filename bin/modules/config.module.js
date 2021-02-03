@@ -38,7 +38,7 @@ function verifySection(sectionId, sectionData) {
     if (sectionData.weekCfg) {
         var weekCfg = verifyWeek(sectionId, sectionData.weekCfg);
         if (weekCfg) {
-            cfg['weekCfg'] = weekCfg;
+            cfg['weekDayCfg'] = weekCfg;
         }
     }
     if (sectionData.monthCfg) {

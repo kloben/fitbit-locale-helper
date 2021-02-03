@@ -15,7 +15,7 @@ export interface MonthConfig extends DateConfig {
 }
 
 export interface SectionLocaleConfig {
-  weekCfg?: WeekConfig,
+  weekDayCfg?: WeekConfig,
   monthCfg?: MonthConfig
 }
 

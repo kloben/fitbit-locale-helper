@@ -35,11 +35,11 @@ for (var i = 1; i <= 7; i++) {
 }
 function GenerateDateLocales(localeId, cfg) {
     var locales = {};
-    if (cfg.weekCfg) {
+    if (cfg.weekDayCfg) {
         for (var _i = 0, weekDates_1 = weekDates; _i < weekDates_1.length; _i++) {
             var date = weekDates_1[_i];
-            var key = "" + (cfg.weekCfg.prefix || 'week_') + date.getDay() + (cfg.weekCfg.suffix || '');
-            locales[key] = index_js_1.default(date, cfg.weekCfg.format, { locale: dateFnsLocales[localeId] });
+            var key = "" + (cfg.weekDayCfg.prefix || 'week_') + date.getDay() + (cfg.weekDayCfg.suffix || '');
+            locales[key] = index_js_1.default(date, cfg.weekDayCfg.format, { locale: dateFnsLocales[localeId] });
         }
     }
     if (cfg.monthCfg) {

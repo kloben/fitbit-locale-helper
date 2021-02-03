@@ -32,7 +32,7 @@ function verifySection(sectionId: string, sectionData: any): SectionLocaleConfig
   if (sectionData.weekCfg) {
     const weekCfg = verifyWeek(sectionId, sectionData.weekCfg)
     if (weekCfg) {
-      cfg['weekCfg'] = weekCfg
+      cfg['weekDayCfg'] = weekCfg
     }
   }
   if (sectionData.monthCfg) {
