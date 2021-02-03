@@ -1,12 +1,13 @@
-import {MonthFormat, WeekFormat} from "../enums/date-formats.enum";
-import {SupportedLocale} from "../enums/supported-locales.enum";
+import { MonthFormat, WeekFormat } from '../enums/date-formats.enum'
+import { SupportedLocale } from '../enums/supported-locales.enum'
 
 export interface DateConfig {
   format: WeekFormat | MonthFormat,
   prefix?: string,
   suffix?: string
 }
-export interface WeekConfig extends DateConfig{
+
+export interface WeekConfig extends DateConfig {
   format: WeekFormat
 }
 

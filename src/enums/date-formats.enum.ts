@@ -8,8 +8,8 @@ export enum MonthFormat {
 }
 
 export enum WeekFormat {
-  E = "E",
-  EEEE = "EEEE",
-  EEEEE = "EEEEE",
-  EEEEEE = "EEEEEE",
+  E = 'E',
+  EEEE = 'EEEE',
+  EEEEE = 'EEEEE',
+  EEEEEE = 'EEEEEE',
 }

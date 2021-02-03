@@ -1,7 +1,7 @@
-import format from 'date-fns/format/index.js';
-import {de, enUS, es, fr, it, ja, ko, nl, sv, zhCN, zhTW, ru, ptBR, ro, cs, pl, id} from 'date-fns/locale/index.js';
-import {SectionLocaleConfig} from "../interfaces/fitbit-locale-config.interface";
-import {SupportedLocale} from "../enums/supported-locales.enum";
+import format from 'date-fns/format/index.js'
+import { cs, de, enUS, es, fr, id, it, ja, ko, nl, pl, ptBR, ro, ru, sv, zhCN, zhTW } from 'date-fns/locale/index.js'
+import { SupportedLocale } from '../enums/supported-locales.enum'
+import { SectionLocaleConfig } from '../interfaces/fitbit-locale-config.interface'
 
 const dateFnsLocales = {
   'es-ES': es,
@@ -20,31 +20,31 @@ const dateFnsLocales = {
   'ro-RO': ro,
   'cs-CZ': cs,
   'pl-PL': pl,
-  'id-ID': id,
-};
+  'id-ID': id
+}
 
-const monthDates: Array<Date> = [];
-const weekDates: Array<Date> = [];
+const monthDates: Array<Date> = []
+const weekDates: Array<Date> = []
 
 for (let i = 0; i < 12; i++) {
-  monthDates.push(new Date(2020, i, 15, 5, 5, 5));
+  monthDates.push(new Date(2020, i, 15, 5, 5, 5))
 }
 for (let i = 1; i <= 7; i++) {
-  weekDates.push(new Date(2021, 7, i, 5, 5, 5));
+  weekDates.push(new Date(2021, 7, i, 5, 5, 5))
 }
 
-export function GenerateDateLocales(localeId: SupportedLocale, cfg: SectionLocaleConfig) {
+export function GenerateDateLocales (localeId: SupportedLocale, cfg: SectionLocaleConfig) {
   const locales: { [keyId: string]: string } = {}
   if (cfg.weekDayCfg) {
     for (const date of weekDates) {
-      const key = `${cfg.weekDayCfg.prefix || 'week_'}${date.getDay()}${cfg.weekDayCfg.suffix || ''}`;
-      locales[key] = format(date, cfg.weekDayCfg.format, {locale: dateFnsLocales[localeId]})
+      const key = `${cfg.weekDayCfg.prefix || 'week_'}${date.getDay()}${cfg.weekDayCfg.suffix || ''}`
+      locales[key] = format(date, cfg.weekDayCfg.format, { locale: dateFnsLocales[localeId] })
     }
   }
   if (cfg.monthCfg) {
     for (const date of monthDates) {
-      const key = `${cfg.monthCfg.prefix || 'month_'}${date.getMonth()}${cfg.monthCfg.suffix || ''}`;
-      locales[key] = format(date, cfg.monthCfg.format, {locale: dateFnsLocales[localeId]})
+      const key = `${cfg.monthCfg.prefix || 'month_'}${date.getMonth()}${cfg.monthCfg.suffix || ''}`
+      locales[key] = format(date, cfg.monthCfg.format, { locale: dateFnsLocales[localeId] })
     }
   }
   return locales
