@@ -4,7 +4,11 @@
     "module": "commonjs",
     "outDir": "bin",
     "esModuleInterop": true,
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "types": [
+      "jest",
+      "node"
+    ]
   },
   "include": [
     "src/**/*.ts"

@@ -49,7 +49,7 @@ function verifySection (sectionId: string, sectionData: any): SectionLocaleConfi
 }
 
 function verifyWeek (sectionId: string, userCfg: any): WeekConfig | void {
-  if (!userCfg.format || !Object.values(WeekFormat).includes(userCfg.format)) {
+  if (!userCfg.format || !WeekFormat[userCfg.format]) {
     console.log(`Missing or wrong format in ${sectionId}.weekCfg. Skipping...`)
     return
   }
@@ -61,7 +61,7 @@ function verifyWeek (sectionId: string, userCfg: any): WeekConfig | void {
 }
 
 function verifyMonth (sectionId: string, userCfg: any): MonthConfig | void {
-  if (!userCfg.format || !Object.values(MonthFormat).includes(userCfg.format)) {
+  if (!userCfg.format || !MonthFormat[userCfg.format]) {
     console.log(`Missing or wrong format in ${sectionId}.monthCfg. Skipping...`)
     return
   }
