@@ -54,8 +54,8 @@ export default {
       suffix: ""
     }
   },
-  settings: { /* Same as app */ },
-  companion: { /* Same as app */ },
+  settings: { /* Same structure as app */ },
+  companion: { /* Same structure as app */ },
 }
 ```
 
