@@ -5,7 +5,7 @@ describe('Existing module', () => {
 
   test('Generate keys from file', () => {
     const sectionId = 'app'
-    const folder = '__tests__/testData'
+    const folder = '__tests__/testLocales'
     const localeId = SupportedLocale['en-US']
 
     const response = GenerateExistingLocales(sectionId, folder, localeId)
@@ -20,7 +20,7 @@ describe('Existing module', () => {
 
   test('Generate keys not found file', () => {
     const sectionId = 'app'
-    const folder = '__tests__/testData'
+    const folder = '__tests__/testLocales'
     const localeId = SupportedLocale['es-ES']
 
     const response = GenerateExistingLocales(sectionId, folder, localeId)

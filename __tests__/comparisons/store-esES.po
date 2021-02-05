@@ -1,0 +1,6 @@
+msgid "testKey"
+msgstr "testValue"
+
+msgid "anotherKey"
+msgstr "anotherValue"
+

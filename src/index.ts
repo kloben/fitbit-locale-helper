@@ -15,7 +15,7 @@ function generateSectionLocales (sectionId: string) {
     }
 
     if (Object.keys(langLocales).length) {
-      StoreLocales(sectionId, langId, langLocales)
+        StoreLocales('', sectionId, langId, langLocales)
     }
   }
 }
