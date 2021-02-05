@@ -37,13 +37,13 @@ export function GenerateDateLocales (localeId: SupportedLocale, cfg: SectionLoca
   const locales: { [keyId: string]: string } = {}
   if (cfg.weekDayCfg) {
     for (const date of weekDates) {
-      const key = `${cfg.weekDayCfg.prefix || ''}${date.getDay()}${cfg.weekDayCfg.suffix || ''}`
+      const key = `${cfg.weekDayCfg.prefix}${date.getDay()}${cfg.weekDayCfg.suffix}`
       locales[key] = format(date, cfg.weekDayCfg.format, { locale: dateFnsLocales[localeId] })
     }
   }
   if (cfg.monthCfg) {
     for (const date of monthDates) {
-      const key = `${cfg.monthCfg.prefix || ''}${date.getMonth()}${cfg.monthCfg.suffix || ''}`
+      const key = `${cfg.monthCfg.prefix}${date.getMonth()}${cfg.monthCfg.suffix}`
       locales[key] = format(date, cfg.monthCfg.format, { locale: dateFnsLocales[localeId] })
     }
   }

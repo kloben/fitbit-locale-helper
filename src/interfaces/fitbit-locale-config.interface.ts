@@ -2,8 +2,8 @@ import { SupportedLocale } from '../enums/supported-locales.enum'
 
 export interface DateConfig {
   format: string,
-  prefix?: string,
-  suffix?: string
+  prefix: string,
+  suffix: string
 }
 
 export interface SectionLocaleConfig {

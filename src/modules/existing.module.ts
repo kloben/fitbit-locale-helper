@@ -1,6 +1,7 @@
 import fs from 'fs'
+import {SupportedLocale} from "../enums/supported-locales.enum";
 
-export function GenerateExistingLocales (sectionId: string, localesFolder: string, langId: string) {
+export function GenerateExistingLocales (sectionId: string, localesFolder: string, langId: SupportedLocale) {
   const filePath = `${localesFolder}/${sectionId}/${langId}.po`
   return fs.existsSync(filePath) ? extractFromPo(filePath) : {}
 }

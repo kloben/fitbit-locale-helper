@@ -8,8 +8,8 @@ describe('Dates module', () => {
   test('Generate default spanish date', () => {
     const locale = SupportedLocale['es-ES']
     const cfg: SectionLocaleConfig = {
-      weekDayCfg: { format: 'E', prefix: 'week_' },
-      monthCfg: { format: 'MMM', prefix: 'month_' }
+      weekDayCfg: { format: 'E', prefix: 'week_', suffix: '' },
+      monthCfg: { format: 'MMM', prefix: 'month_', suffix: '' }
     }
 
     const response = GenerateDateLocales(locale, cfg)
@@ -23,7 +23,7 @@ describe('Dates module', () => {
   test('Generate default month only', () => {
     const locale = SupportedLocale['es-ES']
     const cfg: SectionLocaleConfig = {
-      monthCfg: { format: 'MMM', prefix: 'month_' }
+      monthCfg: { format: 'MMM', prefix: 'month_', suffix: '' }
     }
 
     const response = GenerateDateLocales(locale, cfg)
@@ -36,7 +36,7 @@ describe('Dates module', () => {
   test('Generate default week only', () => {
     const locale = SupportedLocale['es-ES']
     const cfg: SectionLocaleConfig = {
-      weekDayCfg: { format: 'E', prefix: 'week_' }
+      weekDayCfg: { format: 'E', prefix: 'week_', suffix: '' }
     }
 
     const response = GenerateDateLocales(locale, cfg)
@@ -49,8 +49,8 @@ describe('Dates module', () => {
   test('Generate custom week & month english', () => {
     const locale = SupportedLocale['en-US']
     const cfg: SectionLocaleConfig = {
-      weekDayCfg: { format: 'EEEE', suffix: '_suff' },
-      monthCfg: { format: 'MMMM', prefix: 'pref_' },
+      weekDayCfg: { format: 'EEEE', prefix: '', suffix: '_suff' },
+      monthCfg: { format: 'MMMM', prefix: 'pref_', suffix: '' },
     }
 
     const response = GenerateDateLocales(locale, cfg)
