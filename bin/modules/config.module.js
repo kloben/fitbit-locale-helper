@@ -17,7 +17,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.GetConfig = void 0;
 var fs_1 = __importDefault(require("fs"));
 var path_1 = __importDefault(require("path"));
-var date_formats_enum_1 = require("../enums/date-formats.enum");
 var supported_locales_enum_1 = require("../enums/supported-locales.enum");
 function GetConfig() {
     var cfgPath = path_1.default.join(process.cwd(), 'fitbitLocaleHelper.json');
@@ -34,30 +33,33 @@ function GetConfig() {
 }
 exports.GetConfig = GetConfig;
 function verifySection(sectionId, sectionData) {
-    var cfg = {};
+    var cfg = {
+        weekDayCfg: null,
+        monthCfg: null
+    };
     if (sectionData.weekCfg) {
         var weekCfg = verifyWeek(sectionId, sectionData.weekCfg);
         if (weekCfg) {
-            cfg['weekDayCfg'] = weekCfg;
+            cfg.weekDayCfg = weekCfg;
         }
     }
     if (sectionData.monthCfg) {
         var monthCfg = verifyMonth(sectionId, sectionData.monthCfg);
         if (monthCfg) {
-            cfg['monthCfg'] = monthCfg;
+            cfg.monthCfg = monthCfg;
         }
     }
-    return cfg;
+    return cleanObject(cfg);
 }
 function verifyWeek(sectionId, userCfg) {
-    if (!userCfg.format || !Object.values(date_formats_enum_1.WeekFormat).includes(userCfg.format)) {
+    if (!userCfg.format) { //TODO: Validate format
         console.log("Missing or wrong format in " + sectionId + ".weekCfg. Skipping...");
         return;
     }
     return __assign({ format: userCfg.format }, getPrefixes(userCfg, 'week_'));
 }
 function verifyMonth(sectionId, userCfg) {
-    if (!userCfg.format || !Object.values(date_formats_enum_1.MonthFormat).includes(userCfg.format)) {
+    if (!userCfg.format) { //TODO: Validate format
         console.log("Missing or wrong format in " + sectionId + ".monthCfg. Skipping...");
         return;
     }
@@ -67,14 +69,17 @@ function getPrefixes(userCfg, defaultPrefix) {
     if ((!userCfg.prefix && !userCfg.suffix)) {
         return { prefix: defaultPrefix };
     }
-    var prefixes = {};
+    var prefixes = {
+        prefix: null,
+        suffix: null
+    };
     if (userCfg.prefix) {
-        prefixes['prefix'] = userCfg.prefix;
+        prefixes.prefix = userCfg.prefix;
     }
     if (userCfg.suffix) {
-        prefixes['suffix'] = userCfg.suffix;
+        prefixes.suffix = userCfg.suffix;
     }
-    return prefixes;
+    return cleanObject(prefixes);
 }
 function verifyLocales(providedLocales) {
     return providedLocales.filter(function (localeId) {
@@ -84,4 +89,12 @@ function verifyLocales(providedLocales) {
         }
         return true;
     });
+}
+function cleanObject(object) {
+    return Object.keys(object).reduce(function (carry, key) {
+        if (object[key] !== null) {
+            carry[key] = object[key];
+        }
+        return carry;
+    }, {});
 }

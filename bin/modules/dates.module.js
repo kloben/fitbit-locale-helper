@@ -23,7 +23,7 @@ var dateFnsLocales = {
     'ro-RO': index_js_2.ro,
     'cs-CZ': index_js_2.cs,
     'pl-PL': index_js_2.pl,
-    'id-ID': index_js_2.id,
+    'id-ID': index_js_2.id
 };
 var monthDates = [];
 var weekDates = [];
@@ -38,14 +38,14 @@ function GenerateDateLocales(localeId, cfg) {
     if (cfg.weekDayCfg) {
         for (var _i = 0, weekDates_1 = weekDates; _i < weekDates_1.length; _i++) {
             var date = weekDates_1[_i];
-            var key = "" + (cfg.weekDayCfg.prefix || 'week_') + date.getDay() + (cfg.weekDayCfg.suffix || '');
+            var key = "" + cfg.weekDayCfg.prefix + date.getDay() + cfg.weekDayCfg.suffix;
             locales[key] = index_js_1.default(date, cfg.weekDayCfg.format, { locale: dateFnsLocales[localeId] });
         }
     }
     if (cfg.monthCfg) {
         for (var _a = 0, monthDates_1 = monthDates; _a < monthDates_1.length; _a++) {
             var date = monthDates_1[_a];
-            var key = "" + (cfg.monthCfg.prefix || 'month_') + date.getMonth() + (cfg.monthCfg.suffix || '');
+            var key = "" + cfg.monthCfg.prefix + date.getMonth() + cfg.monthCfg.suffix;
             locales[key] = index_js_1.default(date, cfg.monthCfg.format, { locale: dateFnsLocales[localeId] });
         }
     }

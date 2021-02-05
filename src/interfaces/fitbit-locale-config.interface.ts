@@ -13,6 +13,7 @@ export interface SectionLocaleConfig {
 
 export interface FitbitLocaleConfig {
   localesFolder: string,
+  srcFolder: string,
   locales: Array<SupportedLocale>,
   app?: SectionLocaleConfig,
   companion?: SectionLocaleConfig,

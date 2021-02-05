@@ -12,10 +12,10 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+var config_module_1 = require("./modules/config.module");
 var dates_module_1 = require("./modules/dates.module");
 var existing_module_1 = require("./modules/existing.module");
 var store_module_1 = require("./modules/store.module");
-var config_module_1 = require("./modules/config.module");
 var config = config_module_1.GetConfig();
 function generateSectionLocales(sectionId) {
     for (var _i = 0, _a = config.locales; _i < _a.length; _i++) {
