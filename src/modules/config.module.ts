@@ -1,12 +1,10 @@
 import fs from 'fs'
 import path from 'path'
-import { MonthFormat, WeekFormat } from '../enums/date-formats.enum'
 import { SupportedLocale } from '../enums/supported-locales.enum'
 import {
+  DateConfig,
   FitbitLocaleConfig,
-  MonthConfig,
-  SectionLocaleConfig,
-  WeekConfig
+  SectionLocaleConfig
 } from '../interfaces/fitbit-locale-config.interface'
 
 export function GetConfig (): FitbitLocaleConfig {
@@ -48,8 +46,8 @@ function verifySection (sectionId: string, sectionData: any): SectionLocaleConfi
   return cleanObject(cfg)
 }
 
-function verifyWeek (sectionId: string, userCfg: any): WeekConfig | void {
-  if (!userCfg.format || !WeekFormat[userCfg.format]) {
+function verifyWeek (sectionId: string, userCfg: any): DateConfig | void {
+  if (!userCfg.format) { //TODO: Validate format
     console.log(`Missing or wrong format in ${sectionId}.weekCfg. Skipping...`)
     return
   }
@@ -60,8 +58,8 @@ function verifyWeek (sectionId: string, userCfg: any): WeekConfig | void {
   }
 }
 
-function verifyMonth (sectionId: string, userCfg: any): MonthConfig | void {
-  if (!userCfg.format || !MonthFormat[userCfg.format]) {
+function verifyMonth (sectionId: string, userCfg: any): DateConfig | void {
+  if (!userCfg.format) { //TODO: Validate format
     console.log(`Missing or wrong format in ${sectionId}.monthCfg. Skipping...`)
     return
   }

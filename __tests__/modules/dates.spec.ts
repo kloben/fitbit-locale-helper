@@ -1,6 +1,5 @@
 import {SupportedLocale} from "../../src/enums/supported-locales.enum";
 import {SectionLocaleConfig} from "../../src/interfaces/fitbit-locale-config.interface";
-import {MonthFormat, WeekFormat} from "../../src/enums/date-formats.enum";
 import {GenerateDateLocales} from "../../src/modules/dates.module";
 import {GenerateWeek, GenerateMonth} from "../date-test.util";
 
@@ -9,8 +8,8 @@ describe('Dates module', () => {
   test('Generate default spanish date', () => {
     const locale = SupportedLocale['es-ES']
     const cfg: SectionLocaleConfig = {
-      weekDayCfg: { format: WeekFormat.E },
-      monthCfg: { format: MonthFormat.MMM }
+      weekDayCfg: { format: 'E' },
+      monthCfg: { format: 'MMM' }
     }
 
     const response = GenerateDateLocales(locale, cfg)
@@ -24,7 +23,7 @@ describe('Dates module', () => {
   test('Generate month only', () => {
     const locale = SupportedLocale['es-ES']
     const cfg: SectionLocaleConfig = {
-      monthCfg: { format: MonthFormat.MMM }
+      monthCfg: { format: 'MMM' }
     }
 
     const response = GenerateDateLocales(locale, cfg)
@@ -37,7 +36,7 @@ describe('Dates module', () => {
   test('Generate week only', () => {
     const locale = SupportedLocale['es-ES']
     const cfg: SectionLocaleConfig = {
-      weekDayCfg: { format: WeekFormat.E }
+      weekDayCfg: { format: 'E' }
     }
 
     const response = GenerateDateLocales(locale, cfg)
