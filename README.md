@@ -1,7 +1,7 @@
 # Fitbit locale helper
 
 The goal of this library is to make easier the localization of Fitbit apps & clockfaces by generating .po files 
-instead of bundling all languages [More info](https://dev.fitbit.com/build/guides/localization/) 
+instead of bundling all languages [Fitbit Guide](https://dev.fitbit.com/build/guides/localization/) 
 
 ## Features
 
