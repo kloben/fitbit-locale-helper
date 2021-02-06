@@ -51,7 +51,7 @@ function verifySection(sectionId: string, sectionData: any): SectionLocaleConfig
 
 function verifyDateConfig(sectionId: string, userCfg: any, defaultFormat: string, defaultPrefix: string): DateConfig | void {
   if (
-    (userCfg.format && !IsValidDateFormat(userCfg.format)) ||
+    (userCfg.format !== undefined && !IsValidDateFormat(userCfg.format)) ||
     (userCfg.prefix && typeof userCfg.prefix !== 'string') ||
     (userCfg.suffix && typeof userCfg.suffix !== 'string')
   ) {

@@ -183,4 +183,80 @@ describe('Config module', () => {
       }
     })
   })
+
+  test('Wrong week format', () => {
+    const logFn = jest.fn()
+    console.log = logFn
+    const cfg = {
+      app: {
+        weekDayCfg: {
+          format: ''
+        }
+      }
+    }
+
+    const response = GetConfig(cfg)
+
+    expect(logFn).toHaveBeenCalledTimes(1)
+    expect(logFn).toHaveBeenCalledWith('Wrong config in app.weekCfg. Skipping...')
+    expect(response).toEqual({
+      localesFolder: 'locales',
+      srcFolder: '',
+      locales: Object.values(SupportedLocale),
+      app: {}
+    })
+  })
+
+  test('Wrong month format', () => {
+    const logFn = jest.fn()
+    console.log = logFn
+    const cfg = {
+      companion: {
+        monthCfg: {
+          format: ''
+        }
+      }
+    }
+
+    const response = GetConfig(cfg)
+
+    expect(logFn).toHaveBeenCalledTimes(1)
+    expect(logFn).toHaveBeenCalledWith('Wrong config in companion.monthCfg. Skipping...')
+    expect(response).toEqual({
+      localesFolder: 'locales',
+      srcFolder: '',
+      locales: Object.values(SupportedLocale),
+      companion: {}
+    })
+  })
+
+  test('Wrong locale', () => {
+    const logFn = jest.fn()
+    console.log = logFn
+    const cfg = {
+      locales: [SupportedLocale['es-ES'], 'wrong', SupportedLocale['en-US']]
+    }
+
+    const response = GetConfig(cfg)
+
+    expect(logFn).toHaveBeenCalledWith('Unknown locale "wrong". Skipping...')
+    expect(logFn).toHaveBeenCalledTimes(1)
+    expect(response).toEqual({
+      localesFolder: 'locales',
+      srcFolder: '',
+      locales: ['es-ES', 'en-US']
+    })
+  })
+
+  test('All wrong locales', () => {
+
+  })
+
+  test('No settings', () => {
+
+  })
+
+  test('All wrong settings', () => {
+
+  })
 })
