@@ -39,7 +39,7 @@ describe('Store module', () => {
   })
 
   test('Generate existing', async () => {
-    const sectionId = 'settings'
+    const sectionId = 'app'
     const langId = SupportedLocale['es-ES']
     const data = {
       testKey: 'testValue',
@@ -49,7 +49,7 @@ describe('Store module', () => {
     await StoreLocales(testSrcFolder, sectionId, langId, {})
     await StoreLocales(testSrcFolder, sectionId, langId, data)
 
-    const outputFile = testSrcFolder + '/settings/i18n/es-ES.po'
+    const outputFile = testSrcFolder + '/app/i18n/es-ES.po'
     const testFile = '__tests__/comparisons/store-esES.po'
     expect(fs.existsSync(testFile)).toBe(true)
     expect(fs.existsSync(outputFile)).toBe(true)

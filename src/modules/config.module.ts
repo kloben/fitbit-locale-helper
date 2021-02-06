@@ -21,6 +21,7 @@ export function GetConfig (): FitbitLocaleConfig {
 
   return {
     localesFolder: userConfig.localesFolder || 'locales',
+    srcFolder: userConfig.srcFolder || '',
     locales,
     ...sectionsData
   }
@@ -43,7 +44,7 @@ function verifySection (sectionId: string, sectionData: any): SectionLocaleConfi
       cfg.monthCfg = monthCfg
     }
   }
-  return cleanObject(cfg)
+  return cfg
 }
 
 function verifyWeek (sectionId: string, userCfg: any): DateConfig | void {
@@ -53,7 +54,7 @@ function verifyWeek (sectionId: string, userCfg: any): DateConfig | void {
   }
 
   return {
-    format: userCfg.format,
+    format: userCfg.format || 'EEEE',
     ...getPrefixes(userCfg, 'week_')
   }
 }
@@ -70,21 +71,18 @@ function verifyMonth (sectionId: string, userCfg: any): DateConfig | void {
   }
 }
 
-function getPrefixes (userCfg: any, defaultPrefix: string): { prefix?: string, suffix?: string } {
+function getPrefixes (userCfg: any, defaultPrefix: string): { prefix: string, suffix: string } {
   if ((!userCfg.prefix && !userCfg.suffix)) {
-    return { prefix: defaultPrefix }
+    return {
+      prefix: defaultPrefix,
+      suffix: ''
+    }
   }
-  const prefixes = {
-    prefix: null,
-    suffix: null
+
+  return {
+    prefix: userCfg.prefix || '',
+    suffix: userCfg.suffix || ''
   }
-  if (userCfg.prefix) {
-    prefixes.prefix = userCfg.prefix
-  }
-  if (userCfg.suffix) {
-    prefixes.suffix = userCfg.suffix
-  }
-  return cleanObject(prefixes)
 }
 
 function verifyLocales (providedLocales: Array<any>): Array<SupportedLocale> {
@@ -95,13 +93,4 @@ function verifyLocales (providedLocales: Array<any>): Array<SupportedLocale> {
     }
     return true
   })
-}
-
-function cleanObject (object: any) {
-  return Object.keys(object).reduce((carry, key) => {
-    if (object[key] !== null) {
-      carry[key] = object[key]
-    }
-    return carry
-  }, {})
 }
