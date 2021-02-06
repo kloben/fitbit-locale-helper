@@ -84,7 +84,7 @@ describe('Config module', () => {
 
   test('Set companion month only', () => {
     const cfg = {
-      settings: {
+      companion: {
         monthCfg: {}
       }
     }
@@ -95,7 +95,7 @@ describe('Config module', () => {
       srcFolder: '',
       localesFolder: 'locales',
       locales: Object.values(SupportedLocale),
-      settings: {
+      companion: {
         monthCfg: {
           format: 'MMMM',
           prefix: 'month_',
