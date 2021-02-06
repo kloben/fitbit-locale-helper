@@ -104,4 +104,83 @@ describe('Config module', () => {
       }
     })
   })
+
+  test('Set app custom format', () => {
+    const cfg = {
+      app: {
+        weekDayCfg: {
+          format: 'E'
+        },
+        monthCfg: {
+          format: 'MMMMM'
+        }
+      }
+    }
+
+    const response = GetConfig(cfg)
+
+    expect(response).toEqual({
+      srcFolder: '',
+      localesFolder: 'locales',
+      locales: Object.values(SupportedLocale),
+      app: {
+        weekDayCfg: {
+          format: 'E',
+          prefix: 'week_',
+          suffix: ''
+        },
+        monthCfg: {
+          format: 'MMMMM',
+          prefix: 'month_',
+          suffix: ''
+        }
+      }
+    })
+  })
+
+  test('Set app custom prefix or suffix', () => {
+    const cfg = {
+      app: {
+        weekDayCfg: {
+          prefix: 'customPrefix'
+        },
+        monthCfg: {
+          suffix: 'customSuffix'
+        }
+      },
+      settings: {
+        weekDayCfg: {
+          prefix: 'somePrefix',
+          suffix: 'someSuffix'
+        }
+      }
+    }
+
+    const response = GetConfig(cfg)
+
+    expect(response).toEqual({
+      srcFolder: '',
+      localesFolder: 'locales',
+      locales: Object.values(SupportedLocale),
+      app: {
+        weekDayCfg: {
+          format: 'EEEE',
+          prefix: 'customPrefix',
+          suffix: ''
+        },
+        monthCfg: {
+          format: 'MMMM',
+          prefix: '',
+          suffix: 'customSuffix'
+        }
+      },
+      settings: {
+        weekDayCfg: {
+          format: 'EEEE',
+          prefix: 'somePrefix',
+          suffix: 'someSuffix'
+        },
+      }
+    })
+  })
 })
