@@ -1,11 +1,15 @@
 {
-  "localesFolder": "testLocales",
-  "app": {
-    "weekCfg": {
-      "format": "E"
+  "languages": ["es-ES"],
+  "dateTimes": [
+    {
+      "folder": "app",
+      "type": "weekDay",
+      "format": "EEEE"
     },
-    "monthCfg": {
-      "format": "MMM"
+    {
+      "folder": "app",
+      "type": "month",
+      "format": "MMMM"
     }
-  }
+  ]
 }

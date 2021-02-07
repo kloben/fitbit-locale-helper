@@ -1,7 +1,7 @@
 import format from 'date-fns/format/index.js'
 import { cs, de, enUS, es, fr, id, it, ja, ko, nl, pl, ptBR, ro, ru, sv, zhCN, zhTW } from 'date-fns/locale/index.js'
 import { SupportedLanguage } from '../enums/supported-locales.enum'
-import { SectionLocaleConfig } from '../interfaces/fitbit-locale-config.interface'
+import { DateTimeConfig } from '../interfaces/fitbit-locale-config.interface'
 
 const dateFnsLocales = {
   'es-ES': es,
@@ -33,19 +33,15 @@ for (let i = 1; i <= 7; i++) {
   weekDates.push(new Date(2021, 7, i, 5, 5, 5))
 }
 
-export function GenerateDateLocales (localeId: SupportedLanguage, cfg: SectionLocaleConfig) {
-  const locales: { [keyId: string]: string } = {}
-  if (cfg.weekDayCfg) {
-    for (const date of weekDates) {
-      const key = `${cfg.weekDayCfg.prefix}${date.getDay()}${cfg.weekDayCfg.suffix}`
-      locales[key] = format(date, cfg.weekDayCfg.format, { locale: dateFnsLocales[localeId] })
-    }
+export function GenerateDateLocales (localeId: SupportedLanguage, cfg: DateTimeConfig): { [keyId: string]: string } {
+  const fnName = cfg.type === 'weekDay' ? 'getDay' : 'getMonth'
+  const source: Array<Date> = cfg.type === 'weekDay' ? weekDates : monthDates
+  const output = {}
+
+  for (const date of source) {
+    const key = `${cfg.prefix}${date[fnName]()}${cfg.suffix}`
+    output[key] = format(date, cfg.format, { locale: dateFnsLocales[localeId] })
   }
-  if (cfg.monthCfg) {
-    for (const date of monthDates) {
-      const key = `${cfg.monthCfg.prefix}${date.getMonth()}${cfg.monthCfg.suffix}`
-      locales[key] = format(date, cfg.monthCfg.format, { locale: dateFnsLocales[localeId] })
-    }
-  }
-  return locales
+
+  return output
 }

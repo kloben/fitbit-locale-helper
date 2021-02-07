@@ -32,7 +32,7 @@ export function GetConfig(initialCfg?: any): FitbitLocaleConfig | null {
     localesFolder: userConfig.localesFolder || null,
     srcRootFolder: userConfig.srcRootFolder || '',
     languages,
-    ...(dateTimes || {})
+    ...({ dateTimes } || {})
   }
 }
 
