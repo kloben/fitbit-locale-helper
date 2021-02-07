@@ -1,6 +1,12 @@
 import {GetConfig} from "../../src/modules/config.module";
 import {SupportedLocale} from "../../src/enums/supported-locales.enum";
 
+function getLogSpy () {
+  const logFn = jest.fn()
+  console.log = logFn
+  return logFn
+}
+
 describe('Config module', () => {
 
   test('Default config', () => {
@@ -54,8 +60,7 @@ describe('Config module', () => {
     expect(response).toEqual({
       srcFolder: '',
       localesFolder: 'locales',
-      locales: Object.values(SupportedLocale),
-      app: {}
+      locales: Object.values(SupportedLocale)
     })
   })
 
@@ -185,8 +190,7 @@ describe('Config module', () => {
   })
 
   test('Wrong week format', () => {
-    const logFn = jest.fn()
-    console.log = logFn
+    const logFn = getLogSpy()
     const cfg = {
       app: {
         weekDayCfg: {
@@ -202,14 +206,12 @@ describe('Config module', () => {
     expect(response).toEqual({
       localesFolder: 'locales',
       srcFolder: '',
-      locales: Object.values(SupportedLocale),
-      app: {}
+      locales: Object.values(SupportedLocale)
     })
   })
 
   test('Wrong month format', () => {
-    const logFn = jest.fn()
-    console.log = logFn
+    const logFn = getLogSpy()
     const cfg = {
       companion: {
         monthCfg: {
@@ -225,14 +227,12 @@ describe('Config module', () => {
     expect(response).toEqual({
       localesFolder: 'locales',
       srcFolder: '',
-      locales: Object.values(SupportedLocale),
-      companion: {}
+      locales: Object.values(SupportedLocale)
     })
   })
 
   test('Wrong locale', () => {
-    const logFn = jest.fn()
-    console.log = logFn
+    const logFn = getLogSpy()
     const cfg = {
       locales: [SupportedLocale['es-ES'], 'wrong', SupportedLocale['en-US']]
     }
@@ -249,14 +249,18 @@ describe('Config module', () => {
   })
 
   test('All wrong locales', () => {
+    const logFn = getLogSpy()
+    const cfg = {
+      locales: ['all', 'are', 'wrong']
+    }
 
-  })
+    const response = GetConfig(cfg)
 
-  test('No settings', () => {
-
-  })
-
-  test('All wrong settings', () => {
-
+    expect(logFn).toHaveBeenCalledWith('Unknown locale "all". Skipping...')
+    expect(logFn).toHaveBeenCalledWith('Unknown locale "are". Skipping...')
+    expect(logFn).toHaveBeenCalledWith('Unknown locale "wrong". Skipping...')
+    expect(logFn).toHaveBeenCalledWith('No valid locales found. Aborting generation')
+    expect(logFn).toHaveBeenCalledTimes(4)
+    expect(response).toEqual(undefined)
   })
 })

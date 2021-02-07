@@ -8,15 +8,22 @@ import {
 } from '../interfaces/fitbit-locale-config.interface'
 import {IsValidDateFormat} from "../utils/date.util";
 
-export function GetConfig(cfg?: any): FitbitLocaleConfig {
+export function GetConfig(cfg?: any): FitbitLocaleConfig | void {
   const cfgPath = path.join(process.cwd(), 'fitbitLocaleHelper.json')
   const userConfig = cfg || (fs.existsSync(cfgPath) ? JSON.parse(fs.readFileSync(cfgPath, 'utf8')) : {})
   const locales: Array<SupportedLocale> = userConfig.locales ? verifyLocales(userConfig.locales) : Object.values(SupportedLocale)
-  const sectionsData = {}
+  if (!locales.length) {
+    console.log('No valid locales found. Aborting generation')
+    return
+  }
 
+  const sectionsData = {}
   for (const sectionId of ['app', 'settings', 'companion']) {
     if (userConfig[sectionId]) {
-      sectionsData[sectionId] = verifySection(sectionId, userConfig[sectionId])
+      const sectionCfg = verifySection(sectionId, userConfig[sectionId])
+      if (sectionCfg) {
+        sectionsData[sectionId] = sectionCfg
+      }
     }
   }
 
@@ -28,7 +35,7 @@ export function GetConfig(cfg?: any): FitbitLocaleConfig {
   }
 }
 
-function verifySection(sectionId: string, sectionData: any): SectionLocaleConfig {
+function verifySection(sectionId: string, sectionData: any): SectionLocaleConfig | null {
   const cfg: SectionLocaleConfig = {}
   if (sectionData.weekDayCfg !== undefined) {
     const weekCfg = verifyDateConfig(sectionId, sectionData.weekDayCfg, 'EEEE', 'week_')
@@ -46,7 +53,7 @@ function verifySection(sectionId: string, sectionData: any): SectionLocaleConfig
       console.log(`Wrong config in ${sectionId}.monthCfg. Skipping...`)
     }
   }
-  return cfg
+  return Object.keys(cfg).length ? cfg : null
 }
 
 function verifyDateConfig(sectionId: string, userCfg: any, defaultFormat: string, defaultPrefix: string): DateConfig | void {
