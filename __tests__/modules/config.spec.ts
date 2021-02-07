@@ -1,5 +1,5 @@
 import {GetConfig} from "../../src/modules/config.module";
-import {SupportedLocale} from "../../src/enums/supported-locales.enum";
+import {SupportedLanguage} from "../../src/enums/supported-locales.enum";
 
 function getLogSpy () {
   const logFn = jest.fn()
@@ -17,13 +17,13 @@ describe('Config module', () => {
     expect(response).toEqual({
       localesFolder: 'locales',
       srcFolder: '',
-      locales: Object.values(SupportedLocale)
+      locales: Object.values(SupportedLanguage)
     })
   })
 
   test('Set locales only', () => {
     const cfg = {
-      locales: [SupportedLocale['es-ES'], SupportedLocale['en-US']]
+      locales: [SupportedLanguage['es-ES'], SupportedLanguage['en-US']]
     }
 
     const response = GetConfig(cfg)
@@ -46,7 +46,7 @@ describe('Config module', () => {
     expect(response).toEqual({
       srcFolder: 'testSrcFolder',
       localesFolder: 'testLocales',
-      locales: Object.values(SupportedLocale)
+      locales: Object.values(SupportedLanguage)
     })
   })
 
@@ -60,7 +60,7 @@ describe('Config module', () => {
     expect(response).toEqual({
       srcFolder: '',
       localesFolder: 'locales',
-      locales: Object.values(SupportedLocale)
+      locales: Object.values(SupportedLanguage)
     })
   })
 
@@ -76,7 +76,7 @@ describe('Config module', () => {
     expect(response).toEqual({
       srcFolder: '',
       localesFolder: 'locales',
-      locales: Object.values(SupportedLocale),
+      locales: Object.values(SupportedLanguage),
       settings: {
         weekDayCfg: {
           format: 'EEEE',
@@ -99,7 +99,7 @@ describe('Config module', () => {
     expect(response).toEqual({
       srcFolder: '',
       localesFolder: 'locales',
-      locales: Object.values(SupportedLocale),
+      locales: Object.values(SupportedLanguage),
       companion: {
         monthCfg: {
           format: 'MMMM',
@@ -127,7 +127,7 @@ describe('Config module', () => {
     expect(response).toEqual({
       srcFolder: '',
       localesFolder: 'locales',
-      locales: Object.values(SupportedLocale),
+      locales: Object.values(SupportedLanguage),
       app: {
         weekDayCfg: {
           format: 'E',
@@ -166,7 +166,7 @@ describe('Config module', () => {
     expect(response).toEqual({
       srcFolder: '',
       localesFolder: 'locales',
-      locales: Object.values(SupportedLocale),
+      locales: Object.values(SupportedLanguage),
       app: {
         weekDayCfg: {
           format: 'EEEE',
@@ -206,7 +206,7 @@ describe('Config module', () => {
     expect(response).toEqual({
       localesFolder: 'locales',
       srcFolder: '',
-      locales: Object.values(SupportedLocale)
+      locales: Object.values(SupportedLanguage)
     })
   })
 
@@ -227,14 +227,14 @@ describe('Config module', () => {
     expect(response).toEqual({
       localesFolder: 'locales',
       srcFolder: '',
-      locales: Object.values(SupportedLocale)
+      locales: Object.values(SupportedLanguage)
     })
   })
 
   test('Wrong locale', () => {
     const logFn = getLogSpy()
     const cfg = {
-      locales: [SupportedLocale['es-ES'], 'wrong', SupportedLocale['en-US']]
+      locales: [SupportedLanguage['es-ES'], 'wrong', SupportedLanguage['en-US']]
     }
 
     const response = GetConfig(cfg)

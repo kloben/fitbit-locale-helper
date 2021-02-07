@@ -1,6 +1,6 @@
 import format from 'date-fns/format/index.js'
 import { cs, de, enUS, es, fr, id, it, ja, ko, nl, pl, ptBR, ro, ru, sv, zhCN, zhTW } from 'date-fns/locale/index.js'
-import { SupportedLocale } from '../enums/supported-locales.enum'
+import { SupportedLanguage } from '../enums/supported-locales.enum'
 import { SectionLocaleConfig } from '../interfaces/fitbit-locale-config.interface'
 
 const dateFnsLocales = {
@@ -33,7 +33,7 @@ for (let i = 1; i <= 7; i++) {
   weekDates.push(new Date(2021, 7, i, 5, 5, 5))
 }
 
-export function GenerateDateLocales (localeId: SupportedLocale, cfg: SectionLocaleConfig) {
+export function GenerateDateLocales (localeId: SupportedLanguage, cfg: SectionLocaleConfig) {
   const locales: { [keyId: string]: string } = {}
   if (cfg.weekDayCfg) {
     for (const date of weekDates) {

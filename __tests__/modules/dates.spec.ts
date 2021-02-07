@@ -1,4 +1,4 @@
-import {SupportedLocale} from "../../src/enums/supported-locales.enum";
+import {SupportedLanguage} from "../../src/enums/supported-locales.enum";
 import {SectionLocaleConfig} from "../../src/interfaces/fitbit-locale-config.interface";
 import {GenerateDateLocales} from "../../src/modules/dates.module";
 import {GenerateWeek, GenerateMonth} from "../test.util";
@@ -6,7 +6,7 @@ import {GenerateWeek, GenerateMonth} from "../test.util";
 describe('Dates module', () => {
 
   test('Generate default spanish date', () => {
-    const locale = SupportedLocale['es-ES']
+    const locale = SupportedLanguage['es-ES']
     const cfg: SectionLocaleConfig = {
       weekDayCfg: { format: 'E', prefix: 'week_', suffix: '' },
       monthCfg: { format: 'MMM', prefix: 'month_', suffix: '' }
@@ -21,7 +21,7 @@ describe('Dates module', () => {
   })
 
   test('Generate default month only', () => {
-    const locale = SupportedLocale['es-ES']
+    const locale = SupportedLanguage['es-ES']
     const cfg: SectionLocaleConfig = {
       monthCfg: { format: 'MMM', prefix: 'month_', suffix: '' }
     }
@@ -34,7 +34,7 @@ describe('Dates module', () => {
   })
 
   test('Generate default week only', () => {
-    const locale = SupportedLocale['es-ES']
+    const locale = SupportedLanguage['es-ES']
     const cfg: SectionLocaleConfig = {
       weekDayCfg: { format: 'E', prefix: 'week_', suffix: '' }
     }
@@ -47,7 +47,7 @@ describe('Dates module', () => {
   })
 
   test('Generate custom week & month english', () => {
-    const locale = SupportedLocale['en-US']
+    const locale = SupportedLanguage['en-US']
     const cfg: SectionLocaleConfig = {
       weekDayCfg: { format: 'EEEE', prefix: '', suffix: '_suff' },
       monthCfg: { format: 'MMMM', prefix: 'pref_', suffix: '' },

@@ -22,8 +22,8 @@ Set `app`, `companion`, and/or `settings` in the configuration JSON file.
 Set `weekDayCfg` and/or `monthConfig` for each of them. Only specified values will be generated. 
 
 #### If you have any existing .po files
-Create a `locales` folder in the root of your project (or any other folder set in the config)
-Create required subfolders (`locales/app`, `locales/companion`, `locales/settings`) and add the .po files to them.
+Create a `languages` folder in the root of your project (or any other folder set in the config)
+Create required subfolders (`languages/app`, `languages/companion`, `languages/settings`) and add the .po files to them.
 
 ## Usage
 
@@ -40,8 +40,8 @@ textElement.text = gettext('week_0')
 
 ```javascript
 export default {
-  localesFolder: "locales",
-  locales: ["es-ES", "en-US", "de-DE"],
+  localesFolder: "languages",
+  languages: ["es-ES", "en-US", "de-DE"],
   app: {
     weekDayCfg: {
       format: "E",
@@ -61,8 +61,8 @@ export default {
 
 | Attribute | Description | Default |
 | --- | --- | --- |
-| localesFolder | Folder where are located your extra .po files | "locales"
-| locales | List of languages to generate | All 17 supported languages |
+| localesFolder | Folder where are located your extra .po files | "languages"
+| languages | List of languages to generate | All 17 supported languages |
 | app, companion, settings | Which project folders needs to be generated | |
 
 

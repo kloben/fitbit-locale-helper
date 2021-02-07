@@ -1,6 +1,6 @@
 import fs from 'fs'
 import {StoreLocales} from "../../src/modules/store.module";
-import {SupportedLocale} from "../../src/enums/supported-locales.enum";
+import {SupportedLanguage} from "../../src/enums/supported-locales.enum";
 import {FilesAreEquals} from "../test.util";
 
 const testSrcFolder = '__tests__/testSrc'
@@ -23,7 +23,7 @@ describe('Store module', () => {
 
   test('Generate new files and folders', async () => {
     const sectionId = 'settings'
-    const langId = SupportedLocale['es-ES']
+    const langId = SupportedLanguage['es-ES']
     const data = {
       testKey: 'testValue',
       anotherKey: 'anotherValue'
@@ -40,7 +40,7 @@ describe('Store module', () => {
 
   test('Generate existing', async () => {
     const sectionId = 'app'
-    const langId = SupportedLocale['es-ES']
+    const langId = SupportedLanguage['es-ES']
     const data = {
       testKey: 'testValue',
       anotherKey: 'anotherValue'

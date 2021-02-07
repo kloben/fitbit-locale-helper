@@ -1,93 +1,79 @@
 import fs from 'fs'
 import path from 'path'
-import {SupportedLocale} from '../enums/supported-locales.enum'
+import {SupportedLanguage} from '../enums/supported-locales.enum'
 import {
-  DateConfig,
+  DateTimeConfig, DateTimeType, FitbitFolder,
   FitbitLocaleConfig,
-  SectionLocaleConfig
 } from '../interfaces/fitbit-locale-config.interface'
 import {IsValidDateFormat} from "../utils/date.util";
 
-export function GetConfig(cfg?: any): FitbitLocaleConfig | void {
-  const cfgPath = path.join(process.cwd(), 'fitbitLocaleHelper.json')
-  const userConfig = cfg || (fs.existsSync(cfgPath) ? JSON.parse(fs.readFileSync(cfgPath, 'utf8')) : {})
-  const locales: Array<SupportedLocale> = userConfig.locales ? verifyLocales(userConfig.locales) : Object.values(SupportedLocale)
-  if (!locales.length) {
-    console.log('No valid locales found. Aborting generation')
-    return
+export function GetConfig(initialCfg?: any): FitbitLocaleConfig | null {
+  const userCfgPath = path.join(process.cwd(), 'fitbitLocaleHelper.json')
+  const userConfig: FitbitLocaleConfig = initialCfg || (fs.existsSync(userCfgPath) ? JSON.parse(fs.readFileSync(userCfgPath, 'utf8')) : {})
+
+  const languages: Array<SupportedLanguage> = userConfig.languages ? verifyLanguages(userConfig.languages) : Object.values(SupportedLanguage)
+  if (!languages.length) {
+    console.log('No valid languages found. Aborting generation')
+    return null
   }
 
-  const sectionsData = {}
-  for (const sectionId of ['app', 'settings', 'companion']) {
-    if (userConfig[sectionId]) {
-      const sectionCfg = verifySection(sectionId, userConfig[sectionId])
-      if (sectionCfg) {
-        sectionsData[sectionId] = sectionCfg
+  let dateTimes
+  if (userConfig.dateTimes) {
+    dateTimes = []
+    for (let config of userConfig.dateTimes) {
+      const parsedCfg = ParseDateTime(config)
+      if (parsedCfg) {
+        dateTimes.push(parsedCfg)
       }
     }
   }
 
   return {
-    localesFolder: userConfig.localesFolder || 'locales',
-    srcFolder: userConfig.srcFolder || '',
-    locales,
-    ...sectionsData
+    localesFolder: userConfig.localesFolder || null,
+    srcRootFolder: userConfig.srcRootFolder || '',
+    languages,
+    ...(dateTimes || {})
   }
 }
 
-function verifySection(sectionId: string, sectionData: any): SectionLocaleConfig | null {
-  const cfg: SectionLocaleConfig = {}
-  if (sectionData.weekDayCfg !== undefined) {
-    const weekCfg = verifyDateConfig(sectionId, sectionData.weekDayCfg, 'EEEE', 'week_')
-    if (weekCfg) {
-      cfg.weekDayCfg = weekCfg
-    } else {
-      console.log(`Wrong config in ${sectionId}.weekCfg. Skipping...`)
-    }
-  }
-  if (sectionData.monthCfg) {
-    const monthCfg = verifyDateConfig(sectionId, sectionData.monthCfg, 'MMMM', 'month_')
-    if (monthCfg) {
-      cfg.monthCfg = monthCfg
-    } else {
-      console.log(`Wrong config in ${sectionId}.monthCfg. Skipping...`)
-    }
-  }
-  return Object.keys(cfg).length ? cfg : null
-}
-
-function verifyDateConfig(sectionId: string, userCfg: any, defaultFormat: string, defaultPrefix: string): DateConfig | void {
+export function ParseDateTime(cfg: DateTimeConfig): DateTimeConfig | null {
   if (
-    (userCfg.format !== undefined && !IsValidDateFormat(userCfg.format)) ||
-    (userCfg.prefix && typeof userCfg.prefix !== 'string') ||
-    (userCfg.suffix && typeof userCfg.suffix !== 'string')
+    !FitbitFolder[cfg.folder] ||
+    !DateTimeType[cfg.type] ||
+    !cfg.format ||
+    typeof cfg.format !== 'string' ||
+    !IsValidDateFormat(cfg.format) ||
+    (cfg.prefix && typeof cfg.prefix !== 'string') ||
+    (cfg.suffix && typeof cfg.suffix !== 'string')
   ) {
-    return
+    console.log(`Invalid dateTime configuration: ${JSON.stringify(cfg)}`)
+    return null
   }
 
   return {
-    format: userCfg.format || defaultFormat,
-    ...getPrefixes(userCfg, defaultPrefix)
+    folder: cfg.folder,
+    type: cfg.type,
+    format: cfg.format,
+    ...ParsePrefixSuffix(cfg.type, cfg.prefix, cfg.suffix)
   }
 }
 
-function getPrefixes(userCfg: any, defaultPrefix: string): { prefix: string, suffix: string } {
-  if ((!userCfg.prefix && !userCfg.suffix)) {
+export function ParsePrefixSuffix(type: DateTimeType, prefix?: string, suffix?: string): { prefix: string, suffix: string } {
+  if((!prefix || !prefix.length) && (!suffix || !suffix.length)) {
     return {
-      prefix: defaultPrefix,
+      prefix: type === 'weekDay' ? 'week' : 'month',
       suffix: ''
     }
   }
-
   return {
-    prefix: userCfg.prefix || '',
-    suffix: userCfg.suffix || ''
+    prefix: (prefix && prefix.length) ? prefix : '',
+    suffix: (suffix && suffix.length) ? suffix : ''
   }
 }
 
-function verifyLocales(providedLocales: Array<any>): Array<SupportedLocale> {
+function verifyLanguages(providedLocales: Array<any>): Array<SupportedLanguage> {
   return providedLocales.filter((localeId: string) => {
-    if (!SupportedLocale[localeId]) {
+    if (!SupportedLanguage[localeId]) {
       console.log(`Unknown locale "${localeId}". Skipping...`)
       return false
     }

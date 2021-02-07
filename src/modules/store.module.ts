@@ -1,8 +1,8 @@
 import fs from 'fs'
 import path from "path";
-import {SupportedLocale} from "../enums/supported-locales.enum";
+import {SupportedLanguage} from "../enums/supported-locales.enum";
 
-export async function StoreLocales(srcFolder: string, sectionId: string, langId: SupportedLocale, data: any): Promise<void> {
+export async function StoreLocales(srcFolder: string, sectionId: string, langId: SupportedLanguage, data: any): Promise<void> {
   return new Promise((resolve) => {
     const srcPath = path.join(process.cwd(), srcFolder)
 

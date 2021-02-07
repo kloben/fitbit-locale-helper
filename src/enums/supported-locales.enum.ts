@@ -1,4 +1,4 @@
-export enum SupportedLocale {
+export enum SupportedLanguage {
   'es-ES' = 'es-ES',
   'en-US' = 'en-US',
   'de-DE' = 'de-DE',

@@ -1,21 +1,26 @@
-import { SupportedLocale } from '../enums/supported-locales.enum'
+import { SupportedLanguage } from '../enums/supported-locales.enum'
 
-export interface DateConfig {
+export interface DateTimeConfig {
+  folder: FitbitFolder,
+  type: DateTimeType,
   format: string,
   prefix: string,
   suffix: string
 }
 
-export interface SectionLocaleConfig {
-  weekDayCfg?: DateConfig,
-  monthCfg?: DateConfig
+export enum DateTimeType {
+  weekDay = 'weekDay',
+  month = 'month'
+}
+export enum FitbitFolder {
+  app = 'app',
+  companion = 'companion',
+  settings = 'settings',
 }
 
 export interface FitbitLocaleConfig {
-  localesFolder: string,
-  srcFolder: string,
-  locales: Array<SupportedLocale>,
-  app?: SectionLocaleConfig,
-  companion?: SectionLocaleConfig,
-  settings?: SectionLocaleConfig,
+  srcRootFolder: string,
+  languages: Array<SupportedLanguage>,
+  localesFolder?: string,
+  dateTimes?: Array<DateTimeConfig>
 }
