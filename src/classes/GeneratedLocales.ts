@@ -10,17 +10,17 @@ interface storedLocales {
 }
 
 export class GeneratedLocales {
-  public readonly storedLocales: storedLocales = {}
+  public readonly locales: storedLocales = {}
 
   store (folder: FitbitFolder, langId: SupportedLanguage, keys: { [keyId: string]: string }) {
-    if (!this.storedLocales[folder]) {
-      this.storedLocales[folder] = {}
+    if (!this.locales[folder]) {
+      this.locales[folder] = {}
     }
-    if (!this.storedLocales[folder][langId]) {
-      this.storedLocales[folder][langId] = {}
+    if (!this.locales[folder][langId]) {
+      this.locales[folder][langId] = {}
     }
-    this.storedLocales[folder][langId] = {
-      ...(this.storedLocales[folder][langId] || {}),
+    this.locales[folder][langId] = {
+      ...(this.locales[folder][langId] || {}),
       ...keys
     }
   }

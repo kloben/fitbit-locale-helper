@@ -1,28 +1,39 @@
 import fs from 'fs'
-import path from "path";
-import {SupportedLanguage} from "../enums/supported-locales.enum";
+import path from 'path'
+import { GeneratedLocales } from '../classes/GeneratedLocales'
 
-export async function StoreLocales(srcFolder: string, sectionId: string, langId: SupportedLanguage, data: any): Promise<void> {
-  return new Promise((resolve) => {
-    const srcPath = path.join(process.cwd(), srcFolder)
+export async function StoreLocales (srcFolder: string, generated: GeneratedLocales): Promise<number> {
+  let counter = 0
+  const srcPath = path.join(process.cwd(), srcFolder)
+  if (!fs.existsSync(srcPath)) {
+    fs.mkdirSync(srcPath)
+  }
 
-    if (!fs.existsSync(srcPath)) {
-      fs.mkdirSync(srcPath)
+  for (const folderId in generated.locales) {
+    const folderPath = path.join(srcPath, folderId)
+    if (!fs.existsSync(folderPath)) {
+      fs.mkdirSync(folderPath)
     }
-
-    const sectionPath = path.join(srcPath, sectionId)
-    if (!fs.existsSync(sectionPath)) {
-      fs.mkdirSync(sectionPath)
-    }
-
-    const i18nPath = path.join(sectionPath, 'i18n')
+    const i18nPath = path.join(folderPath, 'i18n')
     if (!fs.existsSync(i18nPath)) {
       fs.mkdirSync(i18nPath)
     }
 
-    const filePath = path.join(i18nPath, `${langId}.po`)
+    for (const langId in generated.locales[folderId]) {
+      await writeFile(path.join(i18nPath, `${langId}.po`), generated.locales[folderId][langId])
+      counter += Object.keys(generated.locales[folderId][langId]).length
+    }
+  }
+
+  return counter
+}
+
+function writeFile (filePath: string, data: any) {
+  fs.writeFileSync(filePath, '')
+
+  return new Promise((resolve) => {
     fs.writeFileSync(filePath, '')
-    const stream = fs.createWriteStream(filePath, {flags: 'as'})
+    const stream = fs.createWriteStream(filePath, { flags: 'as' })
 
     for (const keyId in data) {
       stream.write(`msgid "${keyId}"\n`)
