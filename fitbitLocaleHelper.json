@@ -1,5 +1,5 @@
 {
-  "languages": ["es-ES"],
+  "srcRootFolder": "test",
   "dateTimes": [
     {
       "folder": "app",

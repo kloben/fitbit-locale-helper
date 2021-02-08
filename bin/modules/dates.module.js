@@ -34,21 +34,14 @@ for (var i = 1; i <= 7; i++) {
     weekDates.push(new Date(2021, 7, i, 5, 5, 5));
 }
 function GenerateDateLocales(localeId, cfg) {
-    var locales = {};
-    if (cfg.weekDayCfg) {
-        for (var _i = 0, weekDates_1 = weekDates; _i < weekDates_1.length; _i++) {
-            var date = weekDates_1[_i];
-            var key = "" + cfg.weekDayCfg.prefix + date.getDay() + cfg.weekDayCfg.suffix;
-            locales[key] = index_js_1.default(date, cfg.weekDayCfg.format, { locale: dateFnsLocales[localeId] });
-        }
+    var fnName = cfg.type === 'weekDay' ? 'getDay' : 'getMonth';
+    var source = cfg.type === 'weekDay' ? weekDates : monthDates;
+    var output = {};
+    for (var _i = 0, source_1 = source; _i < source_1.length; _i++) {
+        var date = source_1[_i];
+        var key = "" + cfg.prefix + date[fnName]() + cfg.suffix;
+        output[key] = index_js_1.default(date, cfg.format, { locale: dateFnsLocales[localeId] });
     }
-    if (cfg.monthCfg) {
-        for (var _a = 0, monthDates_1 = monthDates; _a < monthDates_1.length; _a++) {
-            var date = monthDates_1[_a];
-            var key = "" + cfg.monthCfg.prefix + date.getMonth() + cfg.monthCfg.suffix;
-            locales[key] = index_js_1.default(date, cfg.monthCfg.format, { locale: dateFnsLocales[localeId] });
-        }
-    }
-    return locales;
+    return output;
 }
 exports.GenerateDateLocales = GenerateDateLocales;
