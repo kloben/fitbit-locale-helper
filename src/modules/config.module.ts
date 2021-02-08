@@ -1,13 +1,15 @@
 import fs from 'fs'
 import path from 'path'
-import {SupportedLanguage} from '../enums/supported-locales.enum'
+import { SupportedLanguage } from '../enums/supported-locales.enum'
 import {
-  DateTimeConfig, DateTimeType, FitbitFolder,
+  DateTimeConfig,
+  DateTimeType,
+  FitbitFolder,
   FitbitLocaleConfig,
 } from '../interfaces/fitbit-locale-config.interface'
-import {IsValidDateFormat} from "../utils/date.util";
+import { IsValidDateFormat } from '../utils/date.util'
 
-export function GetConfig(initialCfg?: any): FitbitLocaleConfig | null {
+export function GetConfig (initialCfg?: any): FitbitLocaleConfig | null {
   const userCfgPath = path.join(process.cwd(), 'fitbitLocaleHelper.json')
   const userConfig: FitbitLocaleConfig = initialCfg || (fs.existsSync(userCfgPath) ? JSON.parse(fs.readFileSync(userCfgPath, 'utf8')) : {})
 
@@ -20,7 +22,7 @@ export function GetConfig(initialCfg?: any): FitbitLocaleConfig | null {
   let dateTimes
   if (userConfig.dateTimes) {
     dateTimes = []
-    for (let config of userConfig.dateTimes) {
+    for (const config of userConfig.dateTimes) {
       const parsedCfg = ParseDateTime(config)
       if (parsedCfg) {
         dateTimes.push(parsedCfg)
@@ -36,7 +38,7 @@ export function GetConfig(initialCfg?: any): FitbitLocaleConfig | null {
   }
 }
 
-export function ParseDateTime(cfg: DateTimeConfig): DateTimeConfig | null {
+export function ParseDateTime (cfg: DateTimeConfig): DateTimeConfig | null {
   if (
     !FitbitFolder[cfg.folder] ||
     !DateTimeType[cfg.type] ||
@@ -58,8 +60,8 @@ export function ParseDateTime(cfg: DateTimeConfig): DateTimeConfig | null {
   }
 }
 
-export function ParsePrefixSuffix(type: DateTimeType, prefix?: string, suffix?: string): { prefix: string, suffix: string } {
-  if((!prefix || !prefix.length) && (!suffix || !suffix.length)) {
+export function ParsePrefixSuffix (type: DateTimeType, prefix?: string, suffix?: string): { prefix: string, suffix: string } {
+  if ((!prefix || !prefix.length) && (!suffix || !suffix.length)) {
     return {
       prefix: type === 'weekDay' ? 'week' : 'month',
       suffix: ''
@@ -71,7 +73,7 @@ export function ParsePrefixSuffix(type: DateTimeType, prefix?: string, suffix?: 
   }
 }
 
-function verifyLanguages(providedLocales: Array<any>): Array<SupportedLanguage> {
+function verifyLanguages (providedLocales: Array<any>): Array<SupportedLanguage> {
   return providedLocales.filter((localeId: string) => {
     if (!SupportedLanguage[localeId]) {
       console.log(`Unknown locale "${localeId}". Skipping...`)
