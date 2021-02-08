@@ -1,7 +1,7 @@
 import fs from 'fs'
 import {StoreLocales} from "../../src/modules/store.module";
 import {SupportedLanguage} from "../../src/enums/supported-locales.enum";
-import {FilesAreEquals} from "../test.util";
+import {FilesAreEquals} from "../../__tests__/test.util";
 
 const testSrcFolder = '__tests__/testSrc'
 

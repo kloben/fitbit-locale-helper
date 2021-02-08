@@ -1,7 +1,7 @@
 import {SupportedLanguage} from "../../src/enums/supported-locales.enum";
 import {SectionLocaleConfig} from "../../src/interfaces/fitbit-locale-config.interface";
 import {GenerateDateLocales} from "../../src/modules/dates.module";
-import {GenerateWeek, GenerateMonth} from "../test.util";
+import {GenerateWeek, GenerateMonth} from "../../__tests__/test.util";
 
 describe('Dates module', () => {
 
