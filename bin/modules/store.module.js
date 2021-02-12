@@ -42,7 +42,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.StoreLocales = void 0;
 var fs_1 = __importDefault(require("fs"));
 var path_1 = __importDefault(require("path"));
-function StoreLocales(srcFolder, generated) {
+function StoreLocales(srcFolder, locales) {
     return __awaiter(this, void 0, void 0, function () {
         var counter, srcPath, _a, _b, _i, folderId, folderPath, i18nPath, _c, _d, _e, langId;
         return __generator(this, function (_f) {
@@ -54,7 +54,7 @@ function StoreLocales(srcFolder, generated) {
                         fs_1.default.mkdirSync(srcPath);
                     }
                     _a = [];
-                    for (_b in generated.locales)
+                    for (_b in locales)
                         _a.push(_b);
                     _i = 0;
                     _f.label = 1;
@@ -70,17 +70,17 @@ function StoreLocales(srcFolder, generated) {
                         fs_1.default.mkdirSync(i18nPath);
                     }
                     _c = [];
-                    for (_d in generated.locales[folderId])
+                    for (_d in locales[folderId])
                         _c.push(_d);
                     _e = 0;
                     _f.label = 2;
                 case 2:
                     if (!(_e < _c.length)) return [3 /*break*/, 5];
                     langId = _c[_e];
-                    return [4 /*yield*/, writeFile(path_1.default.join(i18nPath, langId + ".po"), generated.locales[folderId][langId])];
+                    return [4 /*yield*/, writeFile(path_1.default.join(i18nPath, langId + ".po"), locales[folderId][langId])];
                 case 3:
                     _f.sent();
-                    counter += Object.keys(generated.locales[folderId][langId]).length;
+                    counter += Object.keys(locales[folderId][langId]).length;
                     _f.label = 4;
                 case 4:
                     _e++;
