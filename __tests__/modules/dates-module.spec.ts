@@ -4,7 +4,6 @@ import { SupportedLanguage } from '../../src/enums/supported-locales.enum'
 import { GenerateMonth, GenerateWeek } from '../test.util'
 
 describe('Dates module', () => {
-
   test('Generate spanish weeks', () => {
     const langId = SupportedLanguage['es-ES']
     const cfg: DateTimeConfig = {

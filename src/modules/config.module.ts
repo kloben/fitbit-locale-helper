@@ -13,15 +13,23 @@ export function GetConfig (initialCfg?: any): FitbitLocaleConfig | null {
   const userCfgPath = path.join(process.cwd(), 'fitbitLocaleHelper.json')
   const userConfig: FitbitLocaleConfig = initialCfg || (fs.existsSync(userCfgPath) ? JSON.parse(fs.readFileSync(userCfgPath, 'utf8')) : {})
 
+  if (!isString(userConfig.srcRootFolder)) {
+    console.log('Wrong srcRootFolder. Must be string')
+    return null
+  }
+  if (!isString(userConfig.localesFolder)) {
+    console.log('Wrong localesFolder. Must be string')
+    return null
+  }
+
   const languages: Array<SupportedLanguage> = userConfig.languages ? verifyLanguages(userConfig.languages) : Object.values(SupportedLanguage)
   if (!languages.length) {
     console.log('No valid languages found. Aborting generation')
     return null
   }
 
-  let dateTimes
+  const dateTimes = []
   if (userConfig.dateTimes) {
-    dateTimes = []
     for (const config of userConfig.dateTimes) {
       const parsedCfg = ParseDateTime(config)
       if (parsedCfg) {
@@ -34,8 +42,15 @@ export function GetConfig (initialCfg?: any): FitbitLocaleConfig | null {
     localesFolder: userConfig.localesFolder || null,
     srcRootFolder: userConfig.srcRootFolder || '',
     languages,
-    ...({ dateTimes } || {})
+    dateTimes
   }
+}
+
+function isString (value: any) {
+  if (value !== undefined) {
+    return typeof value === 'string'
+  }
+  return true
 }
 
 export function ParseDateTime (cfg: DateTimeConfig): DateTimeConfig | null {
