@@ -28,6 +28,11 @@ export function GetConfig (initialCfg?: any): FitbitLocaleConfig | null {
     return null
   }
 
+  if (userConfig.dateTimes !== undefined && !Array.isArray(userConfig.dateTimes)) {
+    console.log('Wrong dateTimes. Must be Array')
+    return null
+  }
+
   const dateTimes = []
   if (userConfig.dateTimes) {
     for (const config of userConfig.dateTimes) {
@@ -60,8 +65,8 @@ function ParseDateTime (cfg: DateTimeConfig): DateTimeConfig | null {
     !cfg.format ||
     typeof cfg.format !== 'string' ||
     !IsValidDateFormat(cfg.format) ||
-    (cfg.prefix && typeof cfg.prefix !== 'string') ||
-    (cfg.suffix && typeof cfg.suffix !== 'string')
+    (!isString(cfg.prefix)) ||
+    (!isString(cfg.suffix))
   ) {
     console.log(`Invalid dateTime configuration: ${JSON.stringify(cfg)}`)
     return null
