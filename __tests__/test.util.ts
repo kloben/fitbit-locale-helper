@@ -41,5 +41,5 @@ export function FilesAreEquals (pathA: string, pathB: string): boolean {
   const dataA = fs.readFileSync(pathA).toString()
   const dataB = fs.readFileSync(pathB).toString()
 
-  return dataA == dataB
+  return dataA === dataB
 }

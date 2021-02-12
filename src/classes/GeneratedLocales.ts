@@ -2,7 +2,7 @@ import { FitbitFolder } from '../interfaces/fitbit-locale-config.interface'
 import { SupportedLanguage } from '../enums/supported-locales.enum'
 import { KeyValue } from '../interfaces/key-value.interface'
 
-interface storedLocales {
+export interface StoredLocales {
   [folderId: string]: {
     [langId: string]: {
       [keyId: string]: string
@@ -11,7 +11,7 @@ interface storedLocales {
 }
 
 export class GeneratedLocales {
-  public readonly locales: storedLocales = {}
+  public readonly locales: StoredLocales = {}
 
   store (folder: FitbitFolder, langId: SupportedLanguage, keys: KeyValue) {
     if (!this.locales[folder]) {

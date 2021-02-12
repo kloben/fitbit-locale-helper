@@ -1,15 +1,15 @@
 import fs from 'fs'
 import path from 'path'
-import { GeneratedLocales } from '../classes/GeneratedLocales'
+import { StoredLocales } from '../classes/GeneratedLocales'
 
-export async function StoreLocales (srcFolder: string, generated: GeneratedLocales): Promise<number> {
+export async function StoreLocales (srcFolder: string, locales: StoredLocales): Promise<number> {
   let counter = 0
   const srcPath = path.join(process.cwd(), srcFolder)
   if (!fs.existsSync(srcPath)) {
     fs.mkdirSync(srcPath)
   }
 
-  for (const folderId in generated.locales) {
+  for (const folderId in locales) {
     const folderPath = path.join(srcPath, folderId)
     if (!fs.existsSync(folderPath)) {
       fs.mkdirSync(folderPath)
@@ -19,9 +19,9 @@ export async function StoreLocales (srcFolder: string, generated: GeneratedLocal
       fs.mkdirSync(i18nPath)
     }
 
-    for (const langId in generated.locales[folderId]) {
-      await writeFile(path.join(i18nPath, `${langId}.po`), generated.locales[folderId][langId])
-      counter += Object.keys(generated.locales[folderId][langId]).length
+    for (const langId in locales[folderId]) {
+      await writeFile(path.join(i18nPath, `${langId}.po`), locales[folderId][langId])
+      counter += Object.keys(locales[folderId][langId]).length
     }
   }
 

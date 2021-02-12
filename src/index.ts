@@ -42,7 +42,7 @@ function startGeneration () {
     generateExistingKeys(generated, config.languages, config.localesFolder)
   }
 
-  return StoreLocales(config.srcRootFolder, generated)
+  return StoreLocales(config.srcRootFolder, generated.locales)
 }
 
 startGeneration()
