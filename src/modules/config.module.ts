@@ -53,7 +53,7 @@ function isString (value: any) {
   return true
 }
 
-export function ParseDateTime (cfg: DateTimeConfig): DateTimeConfig | null {
+function ParseDateTime (cfg: DateTimeConfig): DateTimeConfig | null {
   if (
     !FitbitFolder[cfg.folder] ||
     !DateTimeType[cfg.type] ||
@@ -75,7 +75,7 @@ export function ParseDateTime (cfg: DateTimeConfig): DateTimeConfig | null {
   }
 }
 
-export function ParsePrefixSuffix (type: DateTimeType, prefix?: string, suffix?: string): { prefix: string, suffix: string } {
+function ParsePrefixSuffix (type: DateTimeType, prefix?: string, suffix?: string): { prefix: string, suffix: string } {
   if ((!prefix || !prefix.length) && (!suffix || !suffix.length)) {
     return {
       prefix: type === 'weekDay' ? 'week' : 'month',
