@@ -258,4 +258,30 @@ describe('Config module', () => {
     })
     expect(logSpy).toHaveBeenCalledTimes(6)
   })
+
+  test('Get config from file', () => {
+    const response = GetConfig()
+    expect(response).toEqual({
+      localesFolder: 'test/locales',
+      srcRootFolder: 'test/src',
+      languages: ['es-ES', 'fr-FR'],
+      dateTimes: [
+        {
+          folder: 'app',
+          type: 'weekDay',
+          format: 'EEEE',
+          prefix: 'week',
+          suffix: ''
+        },
+        {
+          folder: 'app',
+          type: 'month',
+          format: 'MMMM',
+          prefix: 'month',
+          suffix: ''
+        }
+      ]
+    })
+
+  })
 })

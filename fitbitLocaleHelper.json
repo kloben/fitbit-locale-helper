@@ -1,5 +1,7 @@
 {
-  "srcRootFolder": "test",
+  "srcRootFolder": "test/src",
+  "localesFolder": "test/locales",
+  "languages": ["es-ES", "fr-FR"],
   "dateTimes": [
     {
       "folder": "app",
