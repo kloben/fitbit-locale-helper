@@ -1,4 +1,5 @@
 import fs from 'fs'
+
 const data = {
   es: {
     week: {
@@ -17,26 +18,26 @@ const data = {
     },
     month: {
       MMM: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-      MMMM: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October',  'November', 'December']
+      MMMM: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
     }
   }
 }
 
-export function GenerateWeek(locale: 'en' | 'es', format: 'E' | 'EEEE', prefix: string, suffix: string) {
+export function GenerateWeek (locale: 'en' | 'es', format: 'E' | 'EEEE', prefix: string, suffix: string) {
   return data[locale].week[format].reduce((carry, key, index) => {
     carry[`${prefix}${index}${suffix}`] = key
-    return carry;
+    return carry
   }, {})
 }
 
-export function GenerateMonth(locale: 'en' | 'es', format: 'MMM' | 'MMMM', prefix: string, suffix: string) {
+export function GenerateMonth (locale: 'en' | 'es', format: 'MMM' | 'MMMM', prefix: string, suffix: string) {
   return data[locale].month[format].reduce((carry, key, index) => {
     carry[`${prefix}${index}${suffix}`] = key
-    return carry;
+    return carry
   }, {})
 }
 
-export function FilesAreEquals(pathA: string, pathB: string): boolean {
+export function FilesAreEquals (pathA: string, pathB: string): boolean {
   const dataA = fs.readFileSync(pathA).toString()
   const dataB = fs.readFileSync(pathB).toString()
 
