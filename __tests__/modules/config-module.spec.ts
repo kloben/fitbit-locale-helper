@@ -279,8 +279,8 @@ describe('Config module', () => {
   test('Get config from file', () => {
     const response = GetConfig()
     expect(response).toEqual({
-      localesFolder: 'test/locales',
-      srcRootFolder: 'test/src',
+      localesFolder: 'testData/locales',
+      srcRootFolder: 'testData/src',
       languages: ['es-ES', 'fr-FR'],
       dateTimes: [
         {

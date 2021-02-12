@@ -1,10 +1,11 @@
 import fs from 'fs'
-import {SupportedLanguage} from "../enums/supported-locales.enum";
-import path from "path";
+import path from 'path'
+import { SupportedLanguage } from '../enums/supported-locales.enum'
+import { KeyValue } from '../interfaces/key-value.interface'
 
-export function GenerateExistingLocales (sectionId: string, localesFolder: string, langId: SupportedLanguage) {
+export function GenerateExistingLocales (localesFolder: string, sectionId: string, langId: SupportedLanguage): KeyValue | null {
   const filePath = path.join(process.cwd(), localesFolder, sectionId, `${langId}.po`)
-  return fs.existsSync(filePath) ? extractFromPo(filePath) : {}
+  return fs.existsSync(filePath) ? extractFromPo(filePath) : null
 }
 
 function extractFromPo (filename: string) {

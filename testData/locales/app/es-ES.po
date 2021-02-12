@@ -1,0 +1,10 @@
+msgid "testKey"
+msgstr "testValue"
+
+msgid "anotherKey"
+msgstr "anotherValue"
+
+
+
+msgid "lastItem"
+msgstr "lastValue"

@@ -1,6 +1,6 @@
 {
-  "srcRootFolder": "test/src",
-  "localesFolder": "test/locales",
+  "srcRootFolder": "testData/src",
+  "localesFolder": "testData/locales",
   "languages": ["es-ES", "fr-FR"],
   "dateTimes": [
     {
