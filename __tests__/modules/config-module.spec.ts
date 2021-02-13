@@ -1,12 +1,7 @@
 import { SupportedLanguage } from '../../src/enums/supported-locales.enum'
 import { GetConfig } from '../../src/modules/config.module'
-import { DeleteConfigFile, RestoreOriginalConfigFile, UpdateConfigFile } from '../test.util'
+import { DeleteConfigFile, GetLogSpy, RestoreOriginalConfigFile, UpdateConfigFile } from '../test.util'
 
-function getLogSpy () {
-  const logFn = jest.fn()
-  console.log = logFn
-  return logFn
-}
 
 afterAll(() => {
   RestoreOriginalConfigFile()
@@ -41,7 +36,7 @@ describe('Config module', () => {
   })
 
   test('Set srcRootFolder other than string', () => {
-    const logFn = getLogSpy()
+    const logFn = GetLogSpy()
     const initialCfg = {
       srcRootFolder: 5
     }
@@ -54,7 +49,7 @@ describe('Config module', () => {
   })
 
   test('Set locales other than string', () => {
-    const logFn = getLogSpy()
+    const logFn = GetLogSpy()
     const initialCfg = {
       localesFolder: {}
     }
@@ -80,7 +75,7 @@ describe('Config module', () => {
   })
 
   test('Set mixed wrong language', () => {
-    const logFn = getLogSpy()
+    const logFn = GetLogSpy()
     const initialCfg = { languages: ['es-ES', 'en'] }
 
     const response = GetConfig(initialCfg)
@@ -96,7 +91,7 @@ describe('Config module', () => {
   })
 
   test('Set all wrong language', () => {
-    const logFn = getLogSpy()
+    const logFn = GetLogSpy()
     const initialCfg = { languages: ['es', 'en'] }
 
     const response = GetConfig(initialCfg)
@@ -109,7 +104,7 @@ describe('Config module', () => {
   })
 
   test('Set dateTimes other than array', () => {
-    const logFn = getLogSpy()
+    const logFn = GetLogSpy()
     const initialCfg = {
       dateTimes: {}
     }
@@ -252,7 +247,7 @@ describe('Config module', () => {
       }
     ]
     const initialCfg = { dateTimes }
-    const logSpy = getLogSpy()
+    const logSpy = GetLogSpy()
     const response = GetConfig(initialCfg)
 
     expect(response).toEqual({

@@ -65,3 +65,9 @@ export function UpdateConfigFile (data: string) {
     data
   )
 }
+
+export function GetLogSpy () {
+  const logFn = jest.fn()
+  console.log = logFn
+  return logFn
+}

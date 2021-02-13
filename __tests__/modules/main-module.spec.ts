@@ -1,18 +1,19 @@
 import fs from 'fs'
 import { StartGeneration } from '../../src/modules/main-module'
-import path from 'path'
+import { GetLogSpy, RestoreOriginalConfigFile, UpdateConfigFile } from '../test.util'
 
-const originalPath = path.join(process.cwd(), 'fitbitLocaleHelper.json')
-const backupPath = path.join(process.cwd(), 'fitbitLocaleHelperBACKUP.json')
+const srcFolder = 'testData/src'
 
 beforeAll(() => {
-  fs.renameSync(originalPath, backupPath)
+  if(fs.existsSync(srcFolder)) {
+    fs.rmdirSync(srcFolder, { recursive: true })
+  }
 })
 
 afterAll(() => {
-  fs.renameSync(backupPath, originalPath)
-  if (fs.existsSync(backupPath)) {
-    fs.unlinkSync(backupPath)
+  RestoreOriginalConfigFile()
+  if(fs.existsSync(srcFolder)) {
+    fs.rmdirSync(srcFolder, { recursive: true })
   }
 })
 
@@ -20,21 +21,23 @@ describe('Main module', () => {
   test('Generate without config', async () => {
     const response = await StartGeneration()
 
-    expect(response).toBe(0)
+    expect(response).toBe(41)
   })
 
   test('Generate with wrong config', async () => {
-    fs.writeFileSync(originalPath, 'asdads')
+    const logSpy = GetLogSpy()
+    UpdateConfigFile('asdasd')
+
     const response = await StartGeneration()
 
     expect(response).toBe(0)
+    expect(logSpy).toBeCalledTimes(1)
+    expect(logSpy).toBeCalledWith('Wrong fitbitLocaleHelper.json. Aborting')
   })
 
   test('Generate with config', async () => {
-    if(fs.existsSync('testData/src')) {
-      fs.rmdir('testData/src', { recursive: true }, () => {})
-    }
-    fs.copyFileSync(backupPath, originalPath)
+    RestoreOriginalConfigFile()
+
     const response = await StartGeneration()
 
     expect(response).toBe(41)

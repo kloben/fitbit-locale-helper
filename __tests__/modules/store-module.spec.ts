@@ -3,23 +3,24 @@ import { StoredLocales } from '../../src/classes/GeneratedLocales'
 import { StoreLocales } from '../../src/modules/store.module'
 import { FilesAreEquals } from '../test.util'
 
+const srcFolder = 'testData/src'
+
 afterAll(() => {
-  for(const srcFolder of srcFolders) {
-    clearFolder(srcFolder)
-  }
+  clearFolder()
 })
 
-const srcFolders = ['testDataSrcA', 'testDataSrcB']
+beforeEach(() => {
+  clearFolder()
+})
 
-function clearFolder (srcFolder) {
+function clearFolder () {
   if(fs.existsSync(srcFolder)) {
-    fs.rmdir(srcFolder, { recursive: true }, () => {})
+    fs.rmdirSync(srcFolder, { recursive: true })
   }
 }
 
 describe('Store module', () => {
   test('Generate new files and folders', async () => {
-    clearFolder(srcFolders[0])
     const stored: StoredLocales = {
       app: {
         'es-ES': {
@@ -29,9 +30,9 @@ describe('Store module', () => {
       }
     }
 
-    await StoreLocales(srcFolders[0], stored)
+    await StoreLocales(srcFolder, stored)
 
-    const outputFile = srcFolders[0] + '/app/i18n/es-ES.po'
+    const outputFile = srcFolder + '/app/i18n/es-ES.po'
     const comparisonFile = '__tests__/comparisons/store-esES.po'
     expect(fs.existsSync(comparisonFile)).toBe(true)
     expect(fs.existsSync(outputFile)).toBe(true)
@@ -39,7 +40,6 @@ describe('Store module', () => {
   })
 
   test('Generate complex', async () => {
-    clearFolder(srcFolders[1])
     const someData = {
       testKey: 'testValue',
       anotherKey: 'anotherValue'
@@ -59,12 +59,12 @@ describe('Store module', () => {
       }
     }
 
-    await StoreLocales(srcFolders[1], stored)
+    await StoreLocales(srcFolder, stored)
 
-    expect(fs.existsSync(`${srcFolders[1]}/app/i18n/es-ES.po`)).toBe(true)
-    expect(fs.existsSync(`${srcFolders[1]}/settings/i18n/es-ES.po`)).toBe(true)
-    expect(fs.existsSync(`${srcFolders[1]}/settings/i18n/en-US.po`)).toBe(true)
-    expect(fs.existsSync(`${srcFolders[1]}/companion/i18n/fr-FR.po`)).toBe(true)
-    expect(fs.existsSync(`${srcFolders[1]}/companion/i18n/ru-RU.po`)).toBe(true)
+    expect(fs.existsSync(`${srcFolder}/app/i18n/es-ES.po`)).toBe(true)
+    expect(fs.existsSync(`${srcFolder}/settings/i18n/es-ES.po`)).toBe(true)
+    expect(fs.existsSync(`${srcFolder}/settings/i18n/en-US.po`)).toBe(true)
+    expect(fs.existsSync(`${srcFolder}/companion/i18n/fr-FR.po`)).toBe(true)
+    expect(fs.existsSync(`${srcFolder}/companion/i18n/ru-RU.po`)).toBe(true)
   })
 })
