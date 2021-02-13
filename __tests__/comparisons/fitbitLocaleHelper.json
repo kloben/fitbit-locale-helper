@@ -1,0 +1,17 @@
+{
+  "srcRootFolder": "testData/src",
+  "localesFolder": "testData/locales",
+  "languages": ["es-ES", "fr-FR"],
+  "dateTimes": [
+    {
+      "folder": "app",
+      "type": "weekDay",
+      "format": "EEEE"
+    },
+    {
+      "folder": "app",
+      "type": "month",
+      "format": "MMMM"
+    }
+  ]
+}

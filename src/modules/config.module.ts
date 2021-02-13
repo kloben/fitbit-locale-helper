@@ -10,8 +10,12 @@ import {
 import { IsValidDateFormat } from '../utils/date.util'
 
 export function GetConfig (initialCfg?: any): FitbitLocaleConfig | null {
-  const userCfgPath = path.join(process.cwd(), 'fitbitLocaleHelper.json')
-  const userConfig: FitbitLocaleConfig = initialCfg || (fs.existsSync(userCfgPath) ? JSON.parse(fs.readFileSync(userCfgPath, 'utf8')) : {})
+  const userConfig: FitbitLocaleConfig = initialCfg || readCfgFile()
+
+  if (userConfig === null) {
+    console.log('Wrong fitbitLocaleHelper.json. Aborting')
+    return null
+  }
 
   if (!isString(userConfig.srcRootFolder)) {
     console.log('Wrong srcRootFolder. Must be string')
@@ -48,6 +52,18 @@ export function GetConfig (initialCfg?: any): FitbitLocaleConfig | null {
     srcRootFolder: userConfig.srcRootFolder || '',
     languages,
     dateTimes
+  }
+}
+
+function readCfgFile (): Object | null {
+  const userCfgPath = path.join(process.cwd(), 'fitbitLocaleHelper.json')
+  if (!fs.existsSync(userCfgPath)) {
+    return {}
+  }
+  try {
+    return JSON.parse(fs.readFileSync(userCfgPath, 'utf8'))
+  } catch (e) {
+    return null
   }
 }
 

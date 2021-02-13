@@ -4,5 +4,6 @@ module.exports = {
   collectCoverage: false,
   coverageDirectory: 'coverage',
   collectCoverageFrom: ['src/**/*.{js,ts}'],
-  testMatch: ['**/__tests__/**/*.spec.ts?(x)']
+  testMatch: ['**/__tests__/**/*.spec.ts?(x)'],
+  maxConcurrency: 1
 }

@@ -21,8 +21,11 @@ var supported_locales_enum_1 = require("../enums/supported-locales.enum");
 var fitbit_locale_config_interface_1 = require("../interfaces/fitbit-locale-config.interface");
 var date_util_1 = require("../utils/date.util");
 function GetConfig(initialCfg) {
-    var userCfgPath = path_1.default.join(process.cwd(), 'fitbitLocaleHelper.json');
-    var userConfig = initialCfg || (fs_1.default.existsSync(userCfgPath) ? JSON.parse(fs_1.default.readFileSync(userCfgPath, 'utf8')) : {});
+    var userConfig = initialCfg || readCfgFile();
+    if (userConfig === null) {
+        console.log('Wrong fitbitLocaleHelper.json. Aborting');
+        return null;
+    }
     if (!isString(userConfig.srcRootFolder)) {
         console.log('Wrong srcRootFolder. Must be string');
         return null;
@@ -58,6 +61,18 @@ function GetConfig(initialCfg) {
     };
 }
 exports.GetConfig = GetConfig;
+function readCfgFile() {
+    var userCfgPath = path_1.default.join(process.cwd(), 'fitbitLocaleHelper.json');
+    if (!fs_1.default.existsSync(userCfgPath)) {
+        return {};
+    }
+    try {
+        return JSON.parse(fs_1.default.readFileSync(userCfgPath, 'utf8'));
+    }
+    catch (e) {
+        return null;
+    }
+}
 function isString(value) {
     if (value !== undefined) {
         return typeof value === 'string';

@@ -1,13 +1,16 @@
-import * as fs from 'fs'
-import path from "path"
 import { SupportedLanguage } from '../../src/enums/supported-locales.enum'
 import { GetConfig } from '../../src/modules/config.module'
+import { DeleteConfigFile, RestoreOriginalConfigFile, UpdateConfigFile } from '../test.util'
 
 function getLogSpy () {
   const logFn = jest.fn()
   console.log = logFn
   return logFn
 }
+
+afterAll(() => {
+  RestoreOriginalConfigFile()
+})
 
 describe('Config module', () => {
   test('Default config', () => {
@@ -261,10 +264,9 @@ describe('Config module', () => {
     expect(logSpy).toHaveBeenCalledTimes(6)
   })
 
-  test('Get config from empty', () => {
-    const originalPath = path.join(process.cwd(), 'fitbitLocaleHelper.json');
-    const backupPath = path.join(process.cwd(), 'fitbitLocaleHelperBACKUP.json')
-    fs.renameSync(originalPath, backupPath)
+  test('Get config without file', () => {
+    DeleteConfigFile()
+
     const response = GetConfig()
 
     expect(response).toEqual({
@@ -273,11 +275,21 @@ describe('Config module', () => {
       languages: Object.values(SupportedLanguage),
       dateTimes: []
     })
-    fs.renameSync(backupPath, originalPath)
+  })
+
+  test('Get config from error file', () => {
+    UpdateConfigFile('{')
+
+    const response = GetConfig()
+
+    expect(response).toBe(null)
   })
 
   test('Get config from file', () => {
+    RestoreOriginalConfigFile()
+
     const response = GetConfig()
+
     expect(response).toEqual({
       localesFolder: 'testData/locales',
       srcRootFolder: 'testData/src',
@@ -299,6 +311,5 @@ describe('Config module', () => {
         }
       ]
     })
-
   })
 })

@@ -17,13 +17,16 @@ var GeneratedLocales = /** @class */ (function () {
         this.locales = {};
     }
     GeneratedLocales.prototype.store = function (folder, langId, keys) {
+        if (!Object.keys(keys).length) {
+            return;
+        }
         if (!this.locales[folder]) {
             this.locales[folder] = {};
         }
         if (!this.locales[folder][langId]) {
             this.locales[folder][langId] = {};
         }
-        this.locales[folder][langId] = __assign(__assign({}, (this.locales[folder][langId] || {})), keys);
+        this.locales[folder][langId] = __assign(__assign({}, this.locales[folder][langId]), keys);
     };
     return GeneratedLocales;
 }());

@@ -24,7 +24,7 @@ export class GeneratedLocales {
       this.locales[folder][langId] = {}
     }
     this.locales[folder][langId] = {
-      ...(this.locales[folder][langId] || {}),
+      ...this.locales[folder][langId],
       ...keys
     }
   }
