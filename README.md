@@ -46,6 +46,8 @@ Set `dateTimes` array in the configuration file. Add as many settings as you nee
 ###### Example
 ```json
 {
+  "srcRootFolder": "",
+  "languages": ["es-ES", "en-US", "fr-FR"],
   "dateTimes": [
     {
       "folder": "app",
@@ -88,12 +90,16 @@ month11 => "December"
 
 #### If you have any existing .po files
 
-Set `localesFolder` in the configuration file. Create the folder and add the extra .po files in the required subfolders
+Set `localesFolder` in the configuration file. Create the folder and add the extra .po files in the required subfolders.
+
 Create required subfolders (`locales/app`, `locales/companion`, `locales/settings`) and add the .po files to them with the language set in the name.
 
 ###### Example
 ```json
 {
+  "srcRootFolder": "",
+  "languages": ["es-ES", "en-US", "fr-FR"],
+  "dateTimes": [],
   "localesFolder": "locales"
 }
 ```
