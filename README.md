@@ -119,6 +119,12 @@ root
 ```
 
 ## Usage
+To generate the files just execute from the project root (or where the config file is)
+
+```shell script
+npx fitbit-locale-generate
+```
+
 After generating the translations, you will have the new .po files inside a `i18n` subfolder inside your `app`, `settings` or `companion` folders.
 To use them you will have to use the [i18n API](https://dev.fitbit.com/build/reference/device-api/i18n/) provided by Fitbit
 
