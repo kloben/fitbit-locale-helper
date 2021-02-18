@@ -1,6 +1,6 @@
 {
   "name": "fitbit-locale-helper",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "This library allows you to easily generate locale (.po files) for your Fitbit app or clockface",
   "main": "bin/index.js",
   "scripts": {
@@ -16,14 +16,15 @@
   },
   "author": "Valga Medios",
   "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    "date-fns": "^2.16.1"
+  },
   "devDependencies": {
     "@types/date-fns": "^2.6.0",
     "@types/jest": "^26.0.20",
     "@types/node": "^14.14.22",
     "@typescript-eslint/eslint-plugin": "^4.14.2",
     "@typescript-eslint/parser": "^4.14.2",
-    "date-fns": "^2.16.1",
     "eslint": "^7.19.0",
     "eslint-config-standard": "^16.0.2",
     "eslint-plugin-import": "^2.22.1",
