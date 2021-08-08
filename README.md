@@ -19,7 +19,7 @@ Create a `fitbitLocaleHelper.json` in the root of your project.
 | **Attribute** | **Description** | **Default** |  
 | --- | --- | --- |
 | **srcRootFolder** | If you have a custom build, set where your app, companion and/or settings are (in relation from where the script is executed) | '' |
-| **languages** | List of languages you want to generate | If this value is not set, will generate all 17 currently supported languages  |
+| **languages** | List of languages you want to generate | If this value is not set, will generate all 18 currently supported languages  |
 
 ###### Example
 ```json

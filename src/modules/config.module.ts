@@ -5,7 +5,7 @@ import {
   DateTimeConfig,
   DateTimeType,
   FitbitFolder,
-  FitbitLocaleConfig,
+  FitbitLocaleConfig
 } from '../interfaces/fitbit-locale-config.interface'
 import { IsValidDateFormat } from '../utils/date.util'
 
