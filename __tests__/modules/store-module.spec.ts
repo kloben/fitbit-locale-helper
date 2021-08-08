@@ -1,7 +1,7 @@
 import fs from "fs"
 import { StoredLocales } from '../../src/classes/GeneratedLocales'
 import { StoreLocales } from '../../src/modules/store.module'
-import { FilesAreEquals } from '../test.util'
+import { FilesAreEqual } from '../test.util'
 
 const srcFolder = 'testData/src'
 
@@ -36,7 +36,9 @@ describe('Store module', () => {
     const comparisonFile = '__tests__/comparisons/store-esES.po'
     expect(fs.existsSync(comparisonFile)).toBe(true)
     expect(fs.existsSync(outputFile)).toBe(true)
-    expect(FilesAreEquals(comparisonFile, outputFile)).toBe(true)
+    console.log(fs.readFileSync(comparisonFile).toString().length)
+    console.log(fs.readFileSync(outputFile).toString().length)
+    expect(FilesAreEqual(comparisonFile, outputFile)).toBe(true)
   })
 
   test('Generate complex', async () => {

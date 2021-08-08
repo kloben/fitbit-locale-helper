@@ -15,5 +15,6 @@ export enum SupportedLanguage {
   'ro-RO' = 'ro-RO',
   'cs-CZ' = 'cs-CZ',
   'pl-PL' = 'pl-PL',
-  'id-ID' = 'id-ID'
+  'id-ID' = 'id-ID',
+  'nb-NO' = 'nb-NO'
 }

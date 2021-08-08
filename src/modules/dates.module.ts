@@ -1,5 +1,5 @@
 import format from 'date-fns/format/index.js'
-import { cs, de, enUS, es, fr, id, it, ja, ko, nl, pl, ptBR, ro, ru, sv, zhCN, zhTW } from 'date-fns/locale/index.js'
+import { cs, de, enUS, es, fr, id, it, ja, ko, nb, nl, pl, ptBR, ro, ru, sv, zhCN, zhTW } from 'date-fns/locale/index.js'
 import { SupportedLanguage } from '../enums/supported-locales.enum'
 import { DateTimeConfig } from '../interfaces/fitbit-locale-config.interface'
 import { KeyValue } from '../interfaces/key-value.interface'
@@ -21,7 +21,8 @@ const dateFnsLocales = {
   'ro-RO': ro,
   'cs-CZ': cs,
   'pl-PL': pl,
-  'id-ID': id
+  'id-ID': id,
+  'nb-NO': nb
 }
 
 const monthDates: Array<Date> = []

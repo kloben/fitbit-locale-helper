@@ -39,7 +39,7 @@ export function GenerateMonth (locale: 'en' | 'es', format: 'MMM' | 'MMMM', pref
   }, {})
 }
 
-export function FilesAreEquals (pathA: string, pathB: string): boolean {
+export function FilesAreEqual (pathA: string, pathB: string): boolean {
   const dataA = fs.readFileSync(pathA).toString()
   const dataB = fs.readFileSync(pathB).toString()
 
