@@ -20,4 +20,5 @@ var SupportedLanguage;
     SupportedLanguage["cs-CZ"] = "cs-CZ";
     SupportedLanguage["pl-PL"] = "pl-PL";
     SupportedLanguage["id-ID"] = "id-ID";
+    SupportedLanguage["nb-NO"] = "nb-NO";
 })(SupportedLanguage = exports.SupportedLanguage || (exports.SupportedLanguage = {}));

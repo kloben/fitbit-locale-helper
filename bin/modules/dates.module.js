@@ -23,7 +23,8 @@ var dateFnsLocales = {
     'ro-RO': index_js_2.ro,
     'cs-CZ': index_js_2.cs,
     'pl-PL': index_js_2.pl,
-    'id-ID': index_js_2.id
+    'id-ID': index_js_2.id,
+    'nb-NO': index_js_2.nb
 };
 var monthDates = [];
 var weekDates = [];
